@@ -1,0 +1,103 @@
+.container {
+  position: fixed;
+  top: 10px; /* fixed from '10' to '10px' */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  width: 90vw;
+  height: 7vh;
+  overflow: hidden;
+  /*box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);*/
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  border-radius: 50px;
+  transition: transform 0.3s ease; /* For smooth nav show/hide */
+  font-family: playfulDisplay;
+}
+
+.backgroundBlur {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(39, 38, 38, 0.01);
+  filter: blur(20px); /* fixed */
+  z-index: -99;
+}
+
+.navLinks {
+  width: 500px;
+  position: absolute;
+  right: 5%;
+}
+
+.navLinks ul {
+  list-style: none;
+  display: flex;
+}
+
+.navLinks ul li {
+  margin: 20px;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.navLinks ul li:hover {
+  transform: translateY(-1px) scale(1.05); /* fixed */
+}
+
+.login {
+  border: 1px solid #222222c0;
+  position: absolute;
+  right: 20px;
+  width: 120px;
+  height: 60%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login:hover {
+  transform: translateY(-2px) scale(1.1); /* fixed */
+  box-shadow: -2px 1px 10px 2px rgba(255, 255, 255, 0.103);
+}
+
+.name {
+  position: absolute;
+  display: flex;
+  height: 100%;
+  font-weight: bolder;
+  margin: 20px;
+  font-size: 20px;
+  align-items: center;
+  top: -20px;
+}
+
+@media (max-width: 780px) {
+  .navLinks {
+    width: 150px;
+    position: absolute;
+    right: 40%;
+  }
+
+  .login {
+    right: 20px;
+    width: 80px;
+    height: 60%;
+  }
+
+  .navLinks ul li {
+    margin: 10px;
+    font-weight: bold;
+  }
+
+  .name {
+    height: 100%;
+    display: flex;
+    margin: 30px;
+    align-items: center;
+    top: -30px;
+  }
+}

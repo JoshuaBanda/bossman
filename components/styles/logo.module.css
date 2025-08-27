@@ -1,0 +1,118 @@
+.mainLogoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+
+}
+
+.logoSubContainer {
+
+  background-color: #200e00;
+  border-radius: 50%;
+  height: 110px;
+  width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shapes {
+  position: relative;
+  width: 50px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  transform: translateX(50px);
+
+
+}
+
+.ridContainer,
+.plateContainer,
+.handContainer {
+  height: 90px;
+  width: 90px;
+
+}
+
+.ridContainer svg,
+.handContainer svg,
+.plateContainer svg {
+  fill: #ede7c7;
+  fill-rule: evenodd;
+}
+
+.handContainer svg {
+
+  stroke: #200e00;
+  stroke-width: 2px;
+}
+
+
+.plateContainer {
+  transform: translateY(-65px);
+}
+
+.handContainer {
+  transform: translateY(-130px) scale(0.5);
+}
+
+
+.brandName {
+  color: white;
+  font-size: 60px;
+  transform: translateX(25px);
+  font-family: 'MsMadi';
+}
+
+
+
+
+.folkAndSpoons {
+  height: 80px;
+  width: 100px;
+  display: flex;
+  transform: translateX(2px) translateY(7px);
+
+}
+
+.folkContainer,
+.spoonContainer,
+.knifeContainer {
+  position: absolute;
+  height: 90px;
+}
+
+
+.folkContainer svg,
+.spoonContainer svg,
+.knifeContainer svg {
+  fill: #200e00;
+  fill-rule: evenodd;
+  transform: scale(0.5);
+}
+
+.folkContainer {
+  transform: translateX(-15px);
+}
+
+.knifeContainer {
+  transform: translateX(15px);
+}
+
+
+
+
+.cup{
+  height: 80px;
+  width: 60px;
+  transform: rotate(20deg);
+  display: none;
+}
+.cup svg{
+  fill: #ede7c7;
+  fill-rule: evenodd;
+}

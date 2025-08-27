@@ -1,0 +1,118 @@
+.container{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+}
+.sidePhoto{
+    width: 30vw;
+    height: 100vh;
+    position: relative;
+}
+.leftSide{
+    display: flex;
+    width: 70vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.brand{
+    width:100%;
+    height: 40vh;
+    padding-left:150px ;
+}
+
+
+.brandName{
+    width: 100%;
+    height: 40%;
+    font-size: 40px;
+    letter-spacing: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items:end;
+}
+.motto{
+    width: 60%;
+    height: 50%;
+    font-size: 20px;
+    letter-spacing: 8px;
+    font-weight: bold;
+}
+.isWaiting{
+    list-style: none;
+    display: flex;
+    
+}
+.mottoPhoto{
+    position: relative;
+    width: 100px;
+    height: 30px;
+    margin-left: 20px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+.bottomPhotos{
+    position: relative;
+    height: 60vh;
+    width: 100%;
+    display: flex;
+    bottom: 20px;
+}
+.bottomSecondPhoto{
+    width: 100%;
+}
+.svgContainer{
+position: absolute;
+
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.buttonContainer{
+    position: absolute;
+    bottom: 0px;
+    right: 130px;
+    width: 50px;
+    height: 40%;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    background-color: #222;
+}
+.buttonContainer div{
+    position: relative;
+    height: 100%;
+    transform: scale(0.7);
+}
+.socialMediaContainer {
+    position: absolute;
+    bottom: 0px;
+    height: 150px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    background-color: rgba(0, 255, 34, 0.2);
+
+    /* soft fading shadow */
+    box-shadow: -50px -40px 40px 20px rgba(0, 236, 0, 0.2);
+    text-align: center;
+}
+
+.socialMediaIcons{
+    height: 30px;
+    width: 80%;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.336);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+}
+
+.socialMediaIcons div{
+    width: 20px;
+    height: 20px;
+}

@@ -1,0 +1,39 @@
+.container{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    
+}
+
+
+.cardsContainer{
+ width: 70%;
+ height: 100%;
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ justify-content: space-between;
+}
+.leftSideCardsDisplay {
+  list-style: none;
+  padding: 0;
+}
+
+.leftSideCardsDisplay li {
+  margin-bottom: 5rem; /* adjust spacing */
+}
+
+
+.rightSideCardsDisplay {
+  list-style: none;
+  padding: 0;
+}
+
+.rightSideCardsDisplay li {
+  margin-bottom: 5rem; /* adjust spacing */
+}
+.rightSideCardsDisplay li,.leftSideCardsDisplay li{
+    transform: translateY(100px);
+    opacity: 0;
+}

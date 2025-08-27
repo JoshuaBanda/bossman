@@ -1,0 +1,22 @@
+.container{
+    width: 200px;
+    height: 120px;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.068);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 1px 5px 5px 1px rgba(0, 0, 0, 0.164);
+
+}
+.step{
+    padding: 0px 10px;
+    height: 20%;
+}.procedure {
+  background-color: rgba(192, 192, 192, 0.144);
+  height: 75%;
+  width: 95%;
+  padding: 0px 8px;
+  margin: 0 auto 10px auto; /* centers horizontally */
+  border-bottom: 1px solid silver;
+  border-radius: 0px 0px 10px 10px;
+}

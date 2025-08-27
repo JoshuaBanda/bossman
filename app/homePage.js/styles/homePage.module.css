@@ -1,0 +1,40 @@
+.wrapper {
+  overflow: hidden; /* REQUIRED for ScrollSmoother */
+  height: 100%;
+}
+
+.content {
+  /* your normal content styles */
+}
+
+.container{
+    width: 100vw;
+    background-color: aliceblue;
+    scroll-snap-type: y mandatory;
+    position: relative;
+}
+.container section{
+    scroll-snap-align: start;
+}
+.heroSectoion{
+    scroll-snap-align: start;
+}
+.painePointsSection{
+
+    scroll-snap-align: start;
+}
+
+
+.cookerContainerWrapper{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+.cookerContainer{
+    position: absolute;
+    width: 50vw;
+    height: 100vh;
+    top: 100vh;
+    transform: translateY(100px);
+    border: 1px solid black;
+}
