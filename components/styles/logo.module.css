@@ -4,6 +4,8 @@
   justify-content: center;
   height: 100vh;
   width: 100vw;
+  display: flex;
+  flex-direction: column;
 
 }
 
@@ -16,6 +18,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: translateY(-200px);
+  opacity: 0;
 }
 
 .shapes {
@@ -51,20 +55,25 @@
   stroke-width: 2px;
 }
 
-
+.ridContainer{
+  transform: translateY(-40px);
+  opacity: 0;
+}
 .plateContainer {
-  transform: translateY(-65px);
+  transform: translateY(-85px);
+  opacity: 0;
 }
 
 .handContainer {
-  transform: translateY(-130px) scale(0.5);
+  transform: translateY(-100px) scale(0.5);
+  opacity: 0;
 }
 
 
 .brandName {
   color: white;
   font-size: 60px;
-  transform: translateX(25px);
+  transform: translateX(25px) translateY(20px);
   font-family: 'MsMadi';
 }
 
@@ -115,4 +124,33 @@
 .cup svg{
   fill: #ede7c7;
   fill-rule: evenodd;
+}
+
+
+.loadingContainer{
+  position: absolute;
+  bottom: 5vh;
+  width: 100vw;
+  height:20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:column;
+  color: orangered;
+}
+
+
+.loadingBar {
+  background-color: #200e00;
+  width: 20%;
+  height: 5px;
+  border-radius: 20px;
+  overflow: hidden; /* ensures fill doesn't overflow */
+}
+
+.loadingFill {
+  background-color: orangered;
+  height: 100%;
+  width: 0%;
+  border-radius: 20px;
 }

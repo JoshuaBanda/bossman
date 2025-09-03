@@ -12,6 +12,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Observer } from "gsap/Observer";
 import MenuList from "./MenuList";
 import LessHeroSection from "./LessHeroSection";
+import Logo from "@/components/Logo";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, Observer);
 
@@ -24,6 +25,21 @@ const DesktTopHomePage = () => {
 
   const [progress, setProgress] = useState(0);
   const [menuProgress, setMenuProgress] = useState(0);
+const [loading, setLoading] = useState(0);
+const [finishLoading, setFinishLoading] = useState(false);
+
+const logoLoadingProgress = (progress) => {
+  setLoading(progress); // normalized 0 → 1
+};
+
+useEffect(() => {
+  if (loading >= 0.8 && !finishLoading) { 
+    setFinishLoading(true);
+    console.log('finish loading triggered'); // ✅ works
+  }
+}, [loading, finishLoading]);
+
+
 
   // Cooker & Procedures animation
   useLayoutEffect(() => {
@@ -65,6 +81,7 @@ const DesktTopHomePage = () => {
 
       menuTimeline.to(cookerRef.current, {
         yPercent: 100,
+        xPercent:-50,
         duration: 1,
         ease: "power2.out",
       });
@@ -121,7 +138,11 @@ const DesktTopHomePage = () => {
 
   return (
     <div ref={wrapperRef} id="smooth-wrapper" className={styles.wrapper}>
+      <section className={styles.logoSection} >
+        <Logo loading={loading} finishLoadingProp={finishLoading}/>
+      </section>
       <div ref={contentRef} id="smooth-content" className={styles.content}>
+
         <section className={`${styles.heroSection} snap-section`}>
           <LessHeroSection/>
         </section>
@@ -132,6 +153,7 @@ const DesktTopHomePage = () => {
               <CookerScene
                 progress={progress}
                 storyTellingProgress={menuProgress}
+                loadingProgress={(p) => logoLoadingProgress(p)}
               />
             </Canvas>
           </div>

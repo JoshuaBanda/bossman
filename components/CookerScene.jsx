@@ -1,15 +1,17 @@
 'use client';
 
 import Cooker from '@/components/Cooker';
-import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei';
-import React, { Suspense, useLayoutEffect, useRef } from 'react';
+import { Environment, OrbitControls, PerspectiveCamera, useProgress } from '@react-three/drei';
+import React, { Suspense, useEffect, useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import FryingPan from './FryingPan';
 import Salad from './Salad';
 import ObjectLogger from './OnjectLogger';
+import { useFrame } from '@react-three/fiber';
 
 
-const CookerScene = ({ progress, storyTellingProgress = 0 }) => {
+const CookerScene = ({ progress, storyTellingProgress = 0, loadingProgress }) => {
+
   const cameraRef = useRef();
   const cookerRef = useRef();
   const panRef = useRef();
@@ -19,7 +21,7 @@ const CookerScene = ({ progress, storyTellingProgress = 0 }) => {
   const initialPositions = {
     salad: [-0.2, 0.69, -0.35],
     pan: [0.23, 0.72, 0.12],
-    cooker: [0,0,0],
+    cooker: [0, 0, 0],
   };
 
   const targetPositions = {
@@ -27,12 +29,12 @@ const CookerScene = ({ progress, storyTellingProgress = 0 }) => {
     pan: [0, 1, -0.3],
     cooker: [0, -0.8, 0.],
   };
-
   useLayoutEffect(() => {
-    if (typeof storyTellingProgress !== 'number') return;
+    if (typeof storyTellingProgress !== "number") return;
+    if (!saladRef.current || !panRef.current || !cookerRef.current) return;
 
     const clamp = (v) => Math.min(Math.max(v, 0), 1);
-    const t = clamp(storyTellingProgress); // normalize 0 → 1
+    const t = clamp(storyTellingProgress);
 
     const lerp = (a, b, t) => a + (b - a) * t;
 
@@ -42,7 +44,7 @@ const CookerScene = ({ progress, storyTellingProgress = 0 }) => {
       y: lerp(initialPositions.salad[1], targetPositions.salad[1], t),
       z: lerp(initialPositions.salad[2], targetPositions.salad[2], t),
       duration: 0.5,
-      ease: 'power2.out',
+      ease: "power2.out",
     });
 
     // Pan
@@ -51,7 +53,7 @@ const CookerScene = ({ progress, storyTellingProgress = 0 }) => {
       y: lerp(initialPositions.pan[1], targetPositions.pan[1], t),
       z: lerp(initialPositions.pan[2], targetPositions.pan[2], t),
       duration: 0.5,
-      ease: 'power2.out',
+      ease: "power2.out",
     });
 
     // Cooker
@@ -60,15 +62,16 @@ const CookerScene = ({ progress, storyTellingProgress = 0 }) => {
       y: lerp(initialPositions.cooker[1], targetPositions.cooker[1], t),
       z: lerp(initialPositions.cooker[2], targetPositions.cooker[2], t),
       duration: 0.5,
-      ease: 'power2.out',
+      ease: "power2.out",
     });
   }, [storyTellingProgress]);
+
 
   // Camera interpolation from storyTellingProgress
   useLayoutEffect(() => {
     if (typeof storyTellingProgress !== 'number') return;
     const positions = [
-      
+
       [2.64, 3.23, 0.07],
       [2.98, 1.22, 2.47],
       [2.98, 1.22, 2.47],
@@ -117,6 +120,28 @@ const CookerScene = ({ progress, storyTellingProgress = 0 }) => {
     });
   }, [progress]);
 
+
+
+
+
+  const { progress: loaderProgress, active } = useProgress();
+  const doneRef = useRef(false);
+
+  useFrame(() => {
+    if (doneRef.current) return;
+
+    if (active) {
+      // report actual loader progress
+      loadingProgress(loaderProgress / 100);
+    } else {
+      // loading finished, make sure progress reaches 1
+      loadingProgress(1);
+      doneRef.current = true; // stop further updates
+    }
+  });
+
+
+  //console.log('progress:',progress,'loadingprogress:',loaderProgress);
   return (
     <>
       <PerspectiveCamera ref={cameraRef} makeDefault position={[0.83, 3.96, 0.19]} />
@@ -127,11 +152,15 @@ const CookerScene = ({ progress, storyTellingProgress = 0 }) => {
         <Suspense fallback={null}>
           <Cooker />
         </Suspense>
-        <FryingPan ref={panRef} scale={1.5} position={initialPositions.pan} />
-        <Salad ref={saladRef} position={initialPositions.salad} scale={1.3} />
+        <Suspense fallback={null}>
+          <FryingPan ref={panRef} scale={1.5} position={initialPositions.pan} />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Salad ref={saladRef} position={initialPositions.salad} scale={1.3} />
+        </Suspense>
       </group>
 
-{/*<ObjectLogger targetRef={saladRef} label="Salad" />*/}
+      {/*<ObjectLogger targetRef={saladRef} label="Salad" />*/}
       <Environment preset="sunset" />
     </>
   );

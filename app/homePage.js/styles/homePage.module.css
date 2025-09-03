@@ -39,3 +39,10 @@
 .content {
   padding-bottom: 1px; /* ensures ScrollSmoother scrolls to the end */
 }
+
+
+
+.logoSection{
+  height: 100vh;
+  width: 100vw;
+}
