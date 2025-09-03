@@ -7,28 +7,14 @@
   /* your normal content styles */
 }
 
-.container{
-    width: 100vw;
-    background-color: aliceblue;
-    scroll-snap-type: y mandatory;
-    position: relative;
-}
-.container section{
-    scroll-snap-align: start;
-}
-.heroSectoion{
-    scroll-snap-align: start;
-}
-.painePointsSection{
 
-    scroll-snap-align: start;
-}
 
 
 .cookerContainerWrapper{
+    background-color: pink;
     width: 100vw;
     display: flex;
-    justify-content: center;
+    justify-content: end;
 }
 .cookerContainer{
     position: absolute;
@@ -37,4 +23,19 @@
     top: 100vh;
     transform: translateY(100px);
     border: 1px solid black;
+}
+.heroSection,
+.painPointsSection,
+.menuSection {
+  height: 100vh;
+  width: 100vw;
+}
+.menuListSection {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  scroll-snap-align: none; /* ignore snapping */
+}
+.content {
+  padding-bottom: 1px; /* ensures ScrollSmoother scrolls to the end */
 }

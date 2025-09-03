@@ -4,155 +4,137 @@ import Cooker from '@/components/Cooker';
 import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import React, { Suspense, useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { useFrame } from '@react-three/fiber';
 import FryingPan from './FryingPan';
+import Salad from './Salad';
+import ObjectLogger from './OnjectLogger';
 
-//[-0.08, 1.76, 3.91] position 1
-//[-0.27, 3.26, 2.78] 
-//[-0.13, 4.25, 0.58]
-const CameraLogger = ({ cameraRef }) => {
-    useFrame(() => {
-        if (cameraRef.current) {
-            // Optional: Round values to avoid micro-noise
-            console.log(cameraRef.current.position.toArray().map(v => +v.toFixed(2)));
-        }
+
+const CookerScene = ({ progress, storyTellingProgress = 0 }) => {
+  const cameraRef = useRef();
+  const cookerRef = useRef();
+  const panRef = useRef();
+  const saladRef = useRef();
+
+  // Initial & target positions
+  const initialPositions = {
+    salad: [-0.2, 0.69, -0.35],
+    pan: [0.23, 0.72, 0.12],
+    cooker: [0,0,0],
+  };
+
+  const targetPositions = {
+    salad: [0.275, 1.5, -0.2],
+    pan: [0, 1, -0.3],
+    cooker: [0, -0.8, 0.],
+  };
+
+  useLayoutEffect(() => {
+    if (typeof storyTellingProgress !== 'number') return;
+
+    const clamp = (v) => Math.min(Math.max(v, 0), 1);
+    const t = clamp(storyTellingProgress); // normalize 0 → 1
+
+    const lerp = (a, b, t) => a + (b - a) * t;
+
+    // Salad
+    gsap.to(saladRef.current.position, {
+      x: lerp(initialPositions.salad[0], targetPositions.salad[0], t),
+      y: lerp(initialPositions.salad[1], targetPositions.salad[1], t),
+      z: lerp(initialPositions.salad[2], targetPositions.salad[2], t),
+      duration: 0.5,
+      ease: 'power2.out',
     });
-    return null;
-};
 
-const CookerScene = ({ progress, storyTellingProgress=0 }) => {
-    const cameraRef = useRef();
+    // Pan
+    gsap.to(panRef.current.position, {
+      x: lerp(initialPositions.pan[0], targetPositions.pan[0], t),
+      y: lerp(initialPositions.pan[1], targetPositions.pan[1], t),
+      z: lerp(initialPositions.pan[2], targetPositions.pan[2], t),
+      duration: 0.5,
+      ease: 'power2.out',
+    });
 
+    // Cooker
+    gsap.to(cookerRef.current.position, {
+      x: lerp(initialPositions.cooker[0], targetPositions.cooker[0], t),
+      y: lerp(initialPositions.cooker[1], targetPositions.cooker[1], t),
+      z: lerp(initialPositions.cooker[2], targetPositions.cooker[2], t),
+      duration: 0.5,
+      ease: 'power2.out',
+    });
+  }, [storyTellingProgress]);
 
+  // Camera interpolation from storyTellingProgress
+  useLayoutEffect(() => {
+    if (typeof storyTellingProgress !== 'number') return;
+    const positions = [
+      
+      [2.64, 3.23, 0.07],
+      [2.98, 1.22, 2.47],
+      [2.98, 1.22, 2.47],
+    ];
 
+    const clamped = Math.min(storyTellingProgress, 0.999);
+    const segProgress = 1 / (positions.length - 1);
+    const segIndex = Math.floor(clamped / segProgress);
+    const pct = (clamped % segProgress) / segProgress;
 
+    const [startX, startY, startZ] = positions[segIndex];
+    const [endX, endY, endZ] = positions[Math.min(segIndex + 1, positions.length - 1)];
 
+    gsap.to(cameraRef.current.position, {
+      x: startX + (endX - startX) * pct,
+      y: startY + (endY - startY) * pct,
+      z: startZ + (endZ - startZ) * pct,
+      duration: 0.5,
+      ease: 'power1.out',
+    });
+  }, [storyTellingProgress]);
 
-    useLayoutEffect(() => {
+  // Camera interpolation from progress
+  useLayoutEffect(() => {
+    if (typeof progress !== 'number') return;
+    const positions = [
+      [0.01, 4.23, 0.71],
+      [0.94, 4.11, 0.21],
+      [2.64, 3.23, 0.07],
+    ];
 
-        if (typeof storyTellingProgress !== 'number') return;
-        const positions = [
-            [0.83, 3.96, 0.19],
-            [2.98, 1.22, 2.47],
-            [1.11, -0.28, 3.89],
-            [0.04, -3.73, 1.6]
-        ];
+    const clamped = Math.min(progress, 0.999);
+    const segProgress = 1 / (positions.length - 1);
+    const segIndex = Math.floor(clamped / segProgress);
+    const pct = (clamped % segProgress) / segProgress;
 
-        //if (positions.length < 2 || !cameraRef.current) return;
+    const [startX, startY, startZ] = positions[segIndex];
+    const [endX, endY, endZ] = positions[Math.min(segIndex + 1, positions.length - 1)];
 
-        const clampedProgress = Math.min(storyTellingProgress, 0.999); // avoid overflow
-        const segmentProgress = 1 / (positions.length - 1);
-        const segmentIndex = Math.floor(clampedProgress / segmentProgress);
-        const percentage = (clampedProgress % segmentProgress) / segmentProgress;
+    gsap.to(cameraRef.current.position, {
+      x: startX + (endX - startX) * pct,
+      y: startY + (endY - startY) * pct,
+      z: startZ + (endZ - startZ) * pct,
+      duration: 0.5,
+      ease: 'power1.out',
+    });
+  }, [progress]);
 
-        //console.log('✔ storyTellingProgress:', storyTellingProgress.toFixed(3));
-        //console.log('✔ Segment index:', segmentIndex);
-        //console.log('✔ Percentage in segment:', percentage.toFixed(3));
+  return (
+    <>
+      <PerspectiveCamera ref={cameraRef} makeDefault position={[0.83, 3.96, 0.19]} />
+      <OrbitControls enableZoom={false} enableRotate={true} />
+      <ambientLight intensity={1.5} />
 
-        if (segmentIndex >= positions.length - 1) {
-            const [x, y, z] = positions[positions.length - 1];
-            gsap.to(cameraRef.current.position, {
-                x, y, z,
-                duration: 0.5,
-                ease: 'power1.out',
-            });
-        } else {
-            const [startX, startY, startZ] = positions[segmentIndex];
-            const [endX, endY, endZ] = positions[segmentIndex + 1];
+      <group ref={cookerRef}>
+        <Suspense fallback={null}>
+          <Cooker />
+        </Suspense>
+        <FryingPan ref={panRef} scale={1.5} position={initialPositions.pan} />
+        <Salad ref={saladRef} position={initialPositions.salad} scale={1.3} />
+      </group>
 
-            const x = startX + (endX - startX) * percentage;
-            const y = startY + (endY - startY) * percentage;
-            const z = startZ + (endZ - startZ) * percentage;
-
-            gsap.to(cameraRef.current.position, {
-                x, y, z,
-                duration: 0.5,
-                ease: 'power1.out',
-            });
-        }
-    }, [storyTellingProgress]);
-
-
-
-
-
-
-
-    useLayoutEffect(() => {
-        if (typeof progress !== 'number') return;
-        const positions = [
-            
-            [0.01, 4.23, 0.71],
-            [0.94, 4.11, 0.21],
-            //[2.14, 2.7, 2.48],
-            [2.64, 3.23, 0.07],
-            //[0.41, 1.55, 3.83],
-            //[0, 4.29, 0.18],
-        ];
-
-        //if (positions.length < 2 || !cameraRef.current) return;
-
-        const clampedProgress = Math.min(progress, 0.999); // avoid overflow
-        const segmentProgress = 1 / (positions.length - 1);
-        const segmentIndex = Math.floor(clampedProgress / segmentProgress);
-        const percentage = (clampedProgress % segmentProgress) / segmentProgress;
-
-        //console.log('🔸 Progress:', progress.toFixed(3));
-       // console.log('🔸 Segment index:', segmentIndex);
-        //console.log('🔸 Percentage in segment:', percentage.toFixed(3));
-
-        if (segmentIndex >= positions.length - 1) {
-            const [x, y, z] = positions[positions.length - 1];
-            gsap.to(cameraRef.current.position, {
-                x, y, z,
-                duration: 0.5,
-                ease: 'power1.out',
-            });
-        } else {
-            const [startX, startY, startZ] = positions[segmentIndex];
-            const [endX, endY, endZ] = positions[segmentIndex + 1];
-
-            const x = startX + (endX - startX) * percentage;
-            const y = startY + (endY - startY) * percentage;
-            const z = startZ + (endZ - startZ) * percentage;
-
-            gsap.to(cameraRef.current.position, {
-                x, y, z,
-                duration: 0.5,
-                ease: 'power1.out',
-            });
-        }
-    }, [progress]);
-
-
-
-return (
-  <>
-    <PerspectiveCamera
-      ref={cameraRef}
-      makeDefault
-      position={[0.83, 3.96, 0.19]}
-    />
-
-    <OrbitControls enableZoom={false} enableRotate={true} />
-    <ambientLight intensity={1.5} />
-
-    {/* Group the cooker and pan together */}
-    <group>
-      {/* Cooker at origin */}
-      <Suspense fallback={null}>
-        <Cooker />
-      </Suspense>
-
-      {/* Pan shifted up to sit on top */}
-      <FryingPan scale={1.5} position={[0.23,0.72,0.12]}/> 
-      {/* ↑ adjust Y (2.5) until it sits perfectly */}
-    </group>
-
-    <Environment preset="sunset" />
-  </>
-);
-
+{/*<ObjectLogger targetRef={saladRef} label="Salad" />*/}
+      <Environment preset="sunset" />
+    </>
+  );
 };
 
 export default CookerScene;

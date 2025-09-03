@@ -2,17 +2,19 @@
     height: 100vh;
     width: 100vw;
     display: flex;
-    justify-content: center;
+    position: relative;
     
 }
 
 
 .cardsContainer{
- width: 70%;
+  position: absolute;
+
+ width: 50%;
+ left: 10vw;
  height: 100%;
  display: flex;
  flex-direction: row;
- align-items: center;
  justify-content: space-between;
 }
 .leftSideCardsDisplay {
@@ -21,7 +23,7 @@
 }
 
 .leftSideCardsDisplay li {
-  margin-bottom: 5rem; /* adjust spacing */
+margin-bottom: 7vh;
 }
 
 

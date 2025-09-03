@@ -16,7 +16,7 @@ const Procedures = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: procedureContainerRef.current,
-          start: "top 30%",
+          start: "top 10%",
           end: "bottom bottom",
           scrub: true,
         },
@@ -24,32 +24,11 @@ const Procedures = () => {
 
       // animate each item with a custom final rotation
       itemsRef.current.forEach((el, i) => {
-        let finalRotation;
-        
-        // define final rotation for each step
-        switch (i) {
-          case 0: finalRotation = 30; break;
-          case 1: finalRotation = -10; break;
-          case 2: finalRotation = -10; break;
-          case 3: finalRotation = 10; break;
-          case 4: finalRotation = 15; break;
-          case 5: finalRotation = -10; break;
-          default: finalRotation = 0;
-        }
 
-        let yPosition;
-        switch (i){
-          case 0:yPosition=45;break;
-          case 1:yPosition=60;break;
-          case 2:yPosition=30;break;
-          case 3:yPosition=30;break;
-          case 4:yPosition=20;break;
-          case 5:yPosition=10;break;
-          default:yPosition=0;
-        }
+
         tl.to(
           el,
-          { opacity: 1, y: yPosition, rotation: finalRotation, duration: 1, ease: "power2.out" }, // end state
+          { opacity: 1, y: 60, duration: 5, ease: "power1.out",delay:2 }, // end state
           i * 0.3 // stagger-like timeline position
         );
       });

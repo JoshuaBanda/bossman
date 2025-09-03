@@ -46,19 +46,22 @@ const HeroSection = ({ restaurantName = 'Restuarant name' }) => {
             <div className={styles.leftSide}>
 
                 <div className={styles.brand}>
-                    <div className={styles.brandName}>
+                    <div className={styles.brandName} id='primaryColorOne'>
                         {restaurantName}
                     </div>
                     <div className={styles.motto}>
                         <div className={styles.deliciousFood}>
-                            Delicious Food
+                            <span>Delicious</span>
+                            <span id='primaryColorTwo' style={{marginLeft:'2vw'}}>
+                                food
+                            </span>
                         </div>
                         <div className={styles.isWaiting}>
                             <li>
                                 is waiting
                             </li>
                             <li className={styles.mottoPhoto}>
-                                <Image src='/foodassets/rostedRib.jpg'
+                                <Image src='/foodassets/fullChicken.jpg'
                                     alt='food'
                                     priority
                                     fill
@@ -90,15 +93,18 @@ const HeroSection = ({ restaurantName = 'Restuarant name' }) => {
                                 <defs>
                                     <pattern id="imageFill" patternUnits="userSpaceOnUse" width="1440" height="1024">
                                         <image
-                                            href="/eating.jpg"
+                                            href="/header.jpg"
                                             width="1440"
-                                            height="1024"
-                                            preserveAspectRatio="xMidYMid slice"
+                                            height="570"
+                                            x='-150'
+                                            y='-50'
+
+                                            preserveAspectRatio="xMinYMid meet"
                                         />
                                     </pattern>
                                     <pattern id="imageFill2" patternUnits="userSpaceOnUse" width="1440" height="1024">
                                         <image
-                                            href="/restuarantint2.jpg"
+                                            href="/eating.jpg"
                                             width="1440"
                                             height="1024"
                                             preserveAspectRatio="xMidYMid slice"
@@ -107,7 +113,7 @@ const HeroSection = ({ restaurantName = 'Restuarant name' }) => {
                                 </defs>
                                 <rect fill="url(#imageFill)" width="269" height="491" rx="30" />
                                 <path
-                                    fill="url(#imageFill)" d="M847 0C863.569 1.35295e-06 877 13.4315 877 30V237C877 253.569 863.569 267 847 267H819C802.431 267 789 280.431 789 297V461C789 477.569 775.569 491 759 491H345C328.431 491 315 477.569 315 461V30C315 13.4315 328.431 2.21464e-07 345 0H847Z" />
+                                    fill="url(#imageFill2)" d="M847 0C863.569 1.35295e-06 877 13.4315 877 30V237C877 253.569 863.569 267 847 267H819C802.431 267 789 280.431 789 297V461C789 477.569 775.569 491 759 491H345C328.431 491 315 477.569 315 461V30C315 13.4315 328.431 2.21464e-07 345 0H847Z" />
                             </svg>
 
 

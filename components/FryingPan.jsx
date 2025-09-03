@@ -1,13 +1,16 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, forwardRef, useImperativeHandle } from 'react';
 import { useGLTF } from '@react-three/drei';
 import gsap from 'gsap';
 
-export default function FryingPan({ scale,position }) {
+const FryingPan = forwardRef(({ scale = 1, position = [0, 0, 0] }, ref) => {
   const groupRef = useRef();
   const { nodes, materials } = useGLTF('/fryingPan.glb');
 
   const [lastScale, setLastScale] = useState(scale);
+
+  // Expose the internal group to parent ref
+  useImperativeHandle(ref, () => groupRef.current);
 
   useEffect(() => {
     if (groupRef.current && scale !== lastScale) {
@@ -31,6 +34,7 @@ export default function FryingPan({ scale,position }) {
       />
     </group>
   );
-}
+});
 
+export default FryingPan;
 useGLTF.preload('/fryingPan.glb');

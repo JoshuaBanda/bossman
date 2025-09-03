@@ -1,13 +1,13 @@
 
 @property --primaryColorOne {
   syntax: "<color>";
-  initial-value: rgb(255, 94, 0);
+  initial-value: rgb(35,224, 57);
   inherits: false;
 }
 
 @property --primaryColorTwo {
   syntax: "<color>";
-  initial-value: rgb(214, 0, 0);
+  initial-value: rgb(255, 94, 0);
   inherits: false;
 }
 #primaryColorOne{
