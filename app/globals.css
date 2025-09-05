@@ -16,11 +16,15 @@
 #primaryColorTwo{
   color: var(--primaryColorTwo);
 }
-#primaryBackGroundColorTwo{
-  background-color: var(--primaryColorTwo);
-  color: white;
+#baseBackgroundColor{
+  background-color: rgb(49, 49, 49);
 }
-
+#primaryBackgroundColor{
+  background-color:  var(--primaryColorOne);
+}
+#primaryBackgroundColorTwo{
+  background-color:  var(--primaryColorTwo);
+}
 .primaryBorder{
   border: 2px solid var(--primaryColorOne);
 }

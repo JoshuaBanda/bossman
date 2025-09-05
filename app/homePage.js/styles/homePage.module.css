@@ -3,9 +3,6 @@
   height: 100%;
 }
 
-.content {
-  /* your normal content styles */
-}
 
 
 
@@ -22,7 +19,6 @@
     height: 100vh;
     top: 100vh;
     transform: translateY(100px);
-    border: 1px solid black;
 }
 .heroSection,
 .painPointsSection,
@@ -45,4 +41,7 @@
 .logoSection{
   height: 100vh;
   width: 100vw;
+  position: absolute;
+  background-color: white;
+  z-index: 10;
 }

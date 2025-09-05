@@ -1,16 +1,16 @@
 .container {
     width: 100vw;
     height: 100vh;
-    background-color: rgba(250, 235, 215, 0.288);
     position: relative;
     display: flex;
     flex-direction: column;
+    opacity: 1;
 }
 
 .RestauratNameContainer {
     position: absolute;
     width: 100%;
-    height: 80%;
+    height: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,7 +25,7 @@
 
 .heroVideoContainer {
     position: relative;
-    top: 5vh;
+    top: 0vh;
     height: 50%;
     width: 100%;
     object-fit: cover;
@@ -35,41 +35,71 @@
 }
 
 .heroVideo {
-    width: 90%;
+    width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 20px;
+    border-radius: 0px;
 }
 
 .phraseContainer {
     position: relative;
-    width: 100%;
+    width: 50%;
     height: 40%;
     top: 6vh;
     display: flex;
     align-items: center;
+    transform: translateY(20vh);
+
 }
-.phraseCard{
-    width:50vw;
+
+.phraseCard {
+    width: 50vw;
     height: 95%;
     position: relative;
     left: 5vw;
     background-color: rgba(255, 68, 0, 0.678);
     display: flex;
     justify-content: space-between;
+    cursor: default;
 }
-.phrase{
-    width:50%;
-    padding:20px 30px;
+
+.phrase {
+    width: 50%;
+    padding: 20px 30px;
     color: white;
     position: relative;
+    transition: transform 0.4s ease-in-out;
 }
-.phraseFoodImage{
+
+.phrase:hover {
+    transform: translateY(-5px);
+}
+
+.phrase p {
+
+    transition: transform 0.4s ease-in-out;
+}
+
+.phrase p:hover {
+    transform: scale(1.02);
+}
+
+.phraseFoodImage {
     width: 250px;
     height: 250px;
     position: relative;
 }
-.callToAction{
+
+.phraseFoodImage img {
+    transition: transform 0.4s ease-in-out;
+    position: absolute;
+}
+
+.phraseFoodImage:hover img {
+    transform: rotate(45deg) translateY(-10px) scale(1.05);
+}
+
+.callToAction {
     position: absolute;
     width: 150px;
     height: 35px;
@@ -85,11 +115,13 @@
     transition: transform 0.4s ease-in-out, box-shadow 0.3s ease-in-out;
 
 }
-.callToAction:hover{
+
+.callToAction:hover {
     transform: translateY(18px);
-    box-shadow: 1px 2px 5px 2px  rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 2px 5px 2px rgba(0, 0, 0, 0.2);
 }
-.arrow{
+
+.arrow {
     position: relative;
     height: 100%;
     display: flex;
@@ -97,23 +129,66 @@
     left: 10px;
     transition: transform 0.2s ease-in;
 }
-.arrow:hover{
+
+.arrow:hover {
     transform: translateY(-2px) scale(1.1) rotate(25deg);
 }
 
-.orderNow{
-    
+.orderNow {
+
     transition: transform 0.2s ease-in;
 }
-.orderNow:hover{
-    transform: translateY(-2px) scale(1.1) 
+
+.orderNow:hover {
+    transform: translateY(-2px) scale(1.1)
 }
 
-.borderContainer{
-    
-    width:25%;
+.borderContainer {
+
+    width: 45%;
     height: 100%;
     position: absolute;
     top: 10px;
     left: 6vw;
+}
+
+
+.menuAndTimeContainer {
+    width: 35vw;
+    height: 35vh;
+    position: absolute;
+    right: 50px;
+    bottom: 28px;
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
+
+}
+
+.menuContainer,
+.deliveryTime {
+    position: relative;
+    width: 35%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    transition: transform 0.3s ease-in-out, box-shadow 0.1s ease-in-out;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(30vh);
+}
+
+.deliveryTime:hover {
+    transform: translateY(-15px);
+    box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.3);
+}
+
+.menuContainer:hover {
+    transform: translateY(-15px);
+    box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.3);
 }

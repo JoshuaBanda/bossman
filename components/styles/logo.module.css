@@ -11,14 +11,14 @@
 
 .logoSubContainer {
 
-  background-color: #200e00;
+  background-color: orangered;
   border-radius: 50%;
   height: 110px;
   width: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: translateY(-200px);
+  transform: translateY(-150px);
   opacity: 0;
 }
 
@@ -51,12 +51,12 @@
 
 .handContainer svg {
 
-  stroke: #200e00;
+  stroke: orange;
   stroke-width: 2px;
 }
 
 .ridContainer{
-  transform: translateY(-40px);
+  transform: translateY(-20px);
   opacity: 0;
 }
 .plateContainer {
@@ -85,6 +85,7 @@
   width: 100px;
   display: flex;
   transform: translateX(2px) translateY(7px);
+  z-index: 1;
 
 }
 
@@ -99,20 +100,25 @@
 .folkContainer svg,
 .spoonContainer svg,
 .knifeContainer svg {
-  fill: #200e00;
+  fill: orangered;
   fill-rule: evenodd;
-  transform: scale(0.5);
+  transform: scale(0.4);
 }
 
 .folkContainer {
-  transform: translateX(-15px);
+  transform: translateX(-15px) translateY(20px);
+  opacity: 0;
 }
 
 .knifeContainer {
-  transform: translateX(15px);
+  transform: translateX(15px) translateY(20px);
+  opacity: 0;
 }
 
-
+.spoonContainer{
+  opacity: 0;
+  transform: translateY(20px);
+}
 
 
 .cup{

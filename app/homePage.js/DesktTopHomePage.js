@@ -13,6 +13,7 @@ import { Observer } from "gsap/Observer";
 import MenuList from "./MenuList";
 import LessHeroSection from "./LessHeroSection";
 import Logo from "@/components/Logo";
+import { useSurfaceSampler } from "@react-three/drei";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, Observer);
 
@@ -26,8 +27,41 @@ const DesktTopHomePage = () => {
   const [progress, setProgress] = useState(0);
   const [menuProgress, setMenuProgress] = useState(0);
 const [loading, setLoading] = useState(0);
+const logoSectionRef=useRef();
 const [finishLoading, setFinishLoading] = useState(false);
+const [logoAnimationComplete,setLogoAnimationComplete]=useState(false);
+const hasLoggedRef = useRef(false);
 
+const heroSectionRef=useRef();
+useEffect(() => {
+  if (finishLoading && logoAnimationComplete && !hasLoggedRef.current) {
+    hasLoggedRef.current = true; // prevent running again
+    console.log('done.........');
+
+    const ctx = gsap.context(() => {
+      gsap.timeline({delay:2})
+        .to(logoSectionRef.current, {
+          yPercent:-100,
+          opacity: 0,
+          duration: 2,
+          onComplete: () => {
+            // optional: remove from DOM
+            if (logoSectionRef.current) {
+              logoSectionRef.current.style.display = 'none';
+              ScrollTrigger.refresh();
+            }
+          }
+        });
+    }, logoSectionRef); // scope context to your ref
+
+    return () => ctx.revert(); // cleanup on unmount
+  }
+}, [finishLoading, logoAnimationComplete]);
+
+
+  const finishAnimation = async () => {
+    setLogoAnimationComplete(true);
+  };
 const logoLoadingProgress = (progress) => {
   setLoading(progress); // normalized 0 → 1
 };
@@ -138,13 +172,13 @@ useEffect(() => {
 
   return (
     <div ref={wrapperRef} id="smooth-wrapper" className={styles.wrapper}>
-      <section className={styles.logoSection} >
-        <Logo loading={loading} finishLoadingProp={finishLoading}/>
+      <section className={styles.logoSection} ref={logoSectionRef}>
+        <Logo loading={loading} finishLoadingProp={finishLoading} finishAnimationProp={finishAnimation}/>
       </section>
       <div ref={contentRef} id="smooth-content" className={styles.content}>
 
-        <section className={`${styles.heroSection} snap-section`}>
-          <LessHeroSection/>
+        <section className={`${styles.heroSection} snap-section`} ref={heroSectionRef}>
+          <LessHeroSection logoAnimationCompleteProp={logoAnimationComplete}/>
         </section>
 
         <div className={styles.cookerContainerWrapper}>

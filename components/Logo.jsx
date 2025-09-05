@@ -3,27 +3,25 @@ import React, { useLayoutEffect, useRef, useEffect, useState } from 'react';
 import styles from './styles/logo.module.css';
 import gsap from 'gsap';
 
-const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp }) => {
+const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp ,finishAnimationProp}) => {
   const lettersRef = useRef(null);
   const loadingRef = useRef(null); // loading bar fill
   const handRef = useRef(null);
   const plateRef = useRef(null);
   const ridRef = useRef(null);
   const subContainerRef = useRef(null);
-  const spoonRef = useRef(null);
-  const folkRef = useRef(null);
-  const knifeRef = useRef(null);
+  const spoonRef=useRef();
+  const folkRef=useRef();
+  const knifeRef=useRef();
 
   const [animationComplete, setAnimationComplete] = useState(false);
 
-  const finishAnimation = async () => {
-    console.log('Logo animation finished');
-  };
+
 
   // Run finish callback when animation completes
   useLayoutEffect(() => {
     if (animationComplete) {
-      finishAnimation();
+      finishAnimationProp();
     }
   }, [animationComplete]);
 
@@ -39,7 +37,8 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp })
   }, [loading]);
 
   // Logo animation
-  /*useLayoutEffect(() => {
+  useLayoutEffect(() => {
+    if(!finishLoadingProp) return;
     const ctx = gsap.context(() => {
       const logoTimeline = gsap.timeline({
         onComplete: () => setAnimationComplete(true),
@@ -74,43 +73,42 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp })
         .to(handRef.current, {
           y: -130,
           opacity: 1,
-          duration: 1,
-          ease: 'power1.inOut',
+          duration: 2,
+          ease: 'power1.in',
         }, '>')
         .to(plateRef.current, {
           y: -65,
           opacity: 1,
-          duration: 1,
+          duration: 2,
           ease: 'power1.inOut',
         }, '<')
         .to(ridRef.current, {
-          y: 0,
+            y:0,
           opacity: 1,
-          duration: 1,
-          ease: 'power1.inOut',
+          duration: 2,
+          ease: 'power1.in',
         }, '<')
-        .to(spoonRef.current, {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: 'power1.inOut',
-        }, '<')
-        .to(folkRef.current, {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: 'power1.inOut',
-        }, '<')
-        .to(knifeRef.current, {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: 'power1.inOut',
-        }, '<')
+        .to(spoonRef.current,{
+            y:0,
+            opacity:1,
+            duration:2,
+            ease:'power2.in'
+        },'<').to(folkRef.current,{
+            y:0,
+            opacity:1,
+            duration:1,
+            ease:'power2.inOut'
+        },'<')        .to(knifeRef.current,{
+            y:0,
+            opacity:1,
+            duration:1,
+            ease:'power2.inOut'
+        },'<')
+        
     });
 
     return () => ctx.revert();
-  }, []);*/
+  }, [finishLoadingProp]);
 
   return (
     <div className={styles.mainLogoContainer}>
