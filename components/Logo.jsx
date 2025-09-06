@@ -17,6 +17,7 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp ,f
   const [animationComplete, setAnimationComplete] = useState(false);
 
 
+  
 
   // Run finish callback when animation completes
   useLayoutEffect(() => {
@@ -45,12 +46,20 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp ,f
       });
 
       // Animate container fade in
-      logoTimeline.to(subContainerRef.current, {
+      logoTimeline.to(handRef.current, {
+          y: -130,
+          opacity: 1,
+          duration: 1.5,
+          rotate:0,
+          scale:0.5,
+          ease: 'power1.in',
+        },)
+      .to(subContainerRef.current, {
         opacity: 1,
         y: 0,
         duration: 2,scale:1,
         ease: 'power1.in',
-      });
+      },'<');
 
       // Animate text stroke independently
       const textEl = lettersRef.current;
@@ -61,24 +70,10 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp ,f
           strokeDashoffset: length,
         });
 
-        gsap.to(textEl, {
-          strokeDashoffset: 0,
-          duration: 2,
-          ease: 'power2.inOut',
-        }); // independent, not on timeline
       }
 
       // Animate shapes after text
-      logoTimeline
-        .to(handRef.current, {
-          y: -130,
-          opacity: 1,
-          duration: 2,
-          rotate:0,
-          scale:0.5,
-          ease: 'power1.in',
-        }, '>')
-        .to(plateRef.current, {
+      logoTimeline.to(plateRef.current, {
           y: -65,
           opacity: 1,
           duration: 2,
@@ -88,7 +83,7 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp ,f
             y:0,
           opacity: 1,
           duration: 2,
-          ease: 'power1.in',
+          ease: 'power1.inOut',
         }, '<')
         .to(spoonRef.current,{
             y:0,
@@ -106,6 +101,11 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp ,f
             duration:1,
             ease:'power2.inOut'
         },'<')
+        .to(textEl, {
+          strokeDashoffset: 0,
+          duration: 5,
+          ease: 'power2.inOut',
+        },'<0.5'); // independent, not on timeline
         
     });
 

@@ -170,7 +170,7 @@ const DesktTopHomePage = () => {
   }, [useModel]);
 
   // ScrollSmoother + Observer Snap
-  useEffect(() => {
+ /* useEffect(() => {
     if (typeof window === "undefined") return;
 
     const smoother = ScrollSmoother.create({
@@ -213,7 +213,10 @@ const DesktTopHomePage = () => {
       smoother.kill();
       Observer.getAll().forEach((obs) => obs.kill());
     };
-  }, []);
+  }, []);*/
+
+
+  
 
   return (
     <div ref={wrapperRef} id="smooth-wrapper" className={styles.wrapper}>

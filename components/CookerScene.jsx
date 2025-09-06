@@ -143,7 +143,7 @@ useEffect(() => {
       loadingProgress(1);
       doneRef.current = true;
     }
-  }, 9000);
+  }, 15000);
 
   return () => clearTimeout(timeout);
 }, []); // <- only run once per mount
@@ -182,7 +182,7 @@ useFrame(() => {
           <Cooker />
         </Suspense>
         <Suspense fallback={null}>
-          <FryingPan ref={panRef} scale={1.5} position={initialPositions.pan} />
+          <FryingPan ref={panRef} scale={0.2} position={initialPositions.pan} />
         </Suspense>
         <Suspense fallback={null}>
           <Salad ref={saladRef} position={initialPositions.salad} scale={1.3} />

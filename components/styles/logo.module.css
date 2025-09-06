@@ -1,12 +1,15 @@
 .mainLogoContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+  position: fixed; /* prevents body scroll */
+  top: 0;
+  left: 0;
   width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* hide visual overflow from transforms */
+  z-index: 100;
 }
 
 .logoSubContainer {
@@ -18,7 +21,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: translateY(50px) scale(1.1);
+  transform: translateY(50px) scale(1.5);
   opacity: 0;
 }
 
@@ -56,16 +59,16 @@
 }
 
 .ridContainer{
-  transform: translateY(-20px);
+  transform: translateY(20px);
   opacity: 0;
 }
 .plateContainer {
-  transform: translateY(-85px);
+  transform: translateY(-30px);
   opacity: 0;
 }
 
 .handContainer {
-  transform: translateY(-100px) scale(0.7) rotate(45deg);
+  transform: translateY(-90px) scale(0.75) rotate(75deg);
   opacity: 0;
 }
 
