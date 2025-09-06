@@ -10,8 +10,8 @@ const LessHeroSection = ({ restaurantName = 'RESTAURANT', logoAnimationCompleteP
   const phraseRef = useRef();
   const containerRef = useRef();
   const phraseImageRef = useRef();
-  const menuNavRef=useRef();
-  const deliveryTimeNavRef=useRef();
+  const menuNavRef = useRef();
+  const deliveryTimeNavRef = useRef();
   useEffect(() => {
     if (!logoAnimationCompleteProp) return; // only run when prop is true
 
@@ -54,18 +54,18 @@ const LessHeroSection = ({ restaurantName = 'RESTAURANT', logoAnimationCompleteP
           ease: 'power1.in',
           duration: 1,
         }, '<0.2')
-        .to(menuNavRef.current,{
-          y:0,
-          opacity:1,
-          duration:2,
-          ease:'power1.in'
-        },'<')
-        .to(deliveryTimeNavRef.current,{
-          y:0,
-          opacity:1,
-          duration:2,
+        .to(menuNavRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 2,
           ease: 'power1.in'
-        },'<0.2')
+        }, '<')
+        .to(deliveryTimeNavRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 2,
+          ease: 'power1.in'
+        }, '<0.2')
         .to(phraseImageRef.current, {
           rotate: 360,
           duration: 3,
@@ -92,7 +92,7 @@ const LessHeroSection = ({ restaurantName = 'RESTAURANT', logoAnimationCompleteP
         <video
           id='video'
           className={styles.heroVideo}
-          src="/videos/heroSectionVideo.mp4"   
+          src="/videos/heroSectionVideo.mp4"
           loop
           muted
           autoPlay
@@ -178,6 +178,7 @@ const LessHeroSection = ({ restaurantName = 'RESTAURANT', logoAnimationCompleteP
               alt='food'
               priority
               fill
+              sizes="(max-width: 768px) 100vw, 250px"
               style={{ objectFit: 'cover' }}
             />
           </div>

@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./styles/menuList.module.css";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const MenuList = () => {
   const menuList = [
@@ -28,6 +29,7 @@ const MenuList = () => {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [isInView, setIsInView] = useState(false);
   const containerRef = useRef(null);
+  const router=useRouter();
 
   // config for preview box size
   const followerWidth = 250;
@@ -84,7 +86,10 @@ const MenuList = () => {
             <li
               key={index}
               onMouseEnter={() => handleHover(item)}
-              onMouseLeave={() => setHoveredItem(null)}
+              /*onMouseLeave={() => setHoveredItem(null)}*/
+              onClick={()=>{
+                router.push('/orderMeal')
+              }}
             >
               <div className={styles.name}>
                 {item.name}

@@ -14,6 +14,7 @@ import MenuList from "./MenuList";
 import LessHeroSection from "./LessHeroSection";
 import Logo from "@/components/Logo";
 import { useSurfaceSampler } from "@react-three/drei";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, Observer);
 
@@ -26,52 +27,63 @@ const DesktTopHomePage = () => {
 
   const [progress, setProgress] = useState(0);
   const [menuProgress, setMenuProgress] = useState(0);
-const [loading, setLoading] = useState(0);
-const logoSectionRef=useRef();
-const [finishLoading, setFinishLoading] = useState(false);
-const [logoAnimationComplete,setLogoAnimationComplete]=useState(false);
-const hasLoggedRef = useRef(false);
+  const [loading, setLoading] = useState(0);
+  const logoSectionRef = useRef();
+  const [finishLoading, setFinishLoading] = useState(false);
+  const [logoAnimationComplete, setLogoAnimationComplete] = useState(false);
+  const hasLoggedRef = useRef(false);
 
-const heroSectionRef=useRef();
-useEffect(() => {
-  if (finishLoading && logoAnimationComplete && !hasLoggedRef.current) {
-    hasLoggedRef.current = true; // prevent running again
-    console.log('done.........');
+  const heroSectionRef = useRef();
+  //handle fall back
 
-    const ctx = gsap.context(() => {
-      gsap.timeline({delay:2})
-        .to(logoSectionRef.current, {
-          yPercent:-100,
-          opacity: 0,
-          duration: 2,
-          onComplete: () => {
-            // optional: remove from DOM
-            if (logoSectionRef.current) {
-              logoSectionRef.current.style.display = 'none';
-              ScrollTrigger.refresh();
+  const [useModel, setUseModel] = useState(true);
+  const fallbackImageRef = useRef();
+  const handleFallback = () => {
+    console.log("Fallback triggered from child!");
+    setUseModel(false);
+    // You can also update state, trigger animations, etc.
+  };
+
+
+  useEffect(() => {
+    if (finishLoading && logoAnimationComplete && !hasLoggedRef.current) {
+      hasLoggedRef.current = true; // prevent running again
+      console.log('done.........');
+
+      const ctx = gsap.context(() => {
+        gsap.timeline({ delay: 2 })
+          .to(logoSectionRef.current, {
+            yPercent: -100,
+            opacity: 0,
+            duration: 2,
+            onComplete: () => {
+              // optional: remove from DOM
+              if (logoSectionRef.current) {
+                logoSectionRef.current.style.display = 'none';
+                ScrollTrigger.refresh();
+              }
             }
-          }
-        });
-    }, logoSectionRef); // scope context to your ref
+          });
+      }, logoSectionRef); // scope context to your ref
 
-    return () => ctx.revert(); // cleanup on unmount
-  }
-}, [finishLoading, logoAnimationComplete]);
+      return () => ctx.revert(); // cleanup on unmount
+    }
+  }, [finishLoading, logoAnimationComplete]);
 
 
   const finishAnimation = async () => {
     setLogoAnimationComplete(true);
   };
-const logoLoadingProgress = (progress) => {
-  setLoading(progress); // normalized 0 → 1
-};
+  const logoLoadingProgress = (progress) => {
+    setLoading(progress); // normalized 0 → 1
+  };
 
-useEffect(() => {
-  if (loading >= 0.8 && !finishLoading) { 
-    setFinishLoading(true);
-    console.log('finish loading triggered'); // ✅ works
-  }
-}, [loading, finishLoading]);
+  useEffect(() => {
+    if (loading >= 0.8 && !finishLoading) {
+      setFinishLoading(true);
+      console.log('finish loading triggered'); // ✅ works
+    }
+  }, [loading, finishLoading]);
 
 
 
@@ -85,12 +97,27 @@ useEffect(() => {
           start: "top 60%",
           end: "bottom bottom",
           scrub: true,
-          onUpdate: (self) => setProgress(self.progress),
-          delay:5,
+          onUpdate: (self) => {
+            setProgress(self.progress);
+
+          },
+          delay: useModel ? 5 : 0,
         },
       });
 
-
+      if (!useModel) {
+        gsap.to(fallbackImageRef.current, {
+          rotate: 150,
+          duration: 2,
+          ease: 'power1.inOut',
+          scrollTrigger: {
+            trigger: procedureRef.current,
+            start: "top 60%",
+            end: "bottom bottom",
+            scrub: true,
+          }
+        })
+      }
       gsap.to(cookerRef.current, {
         y: 0,
         duration: 1,
@@ -109,20 +136,38 @@ useEffect(() => {
           start: "top 80%",
           end: "bottom bottom",
           scrub: true,
-          onUpdate: (self) => setMenuProgress(self.progress),
+          onUpdate: (self) => {
+            setMenuProgress(self.progress);
+          },
         },
       });
 
+
+      if (!useModel) {
+        gsap.to(fallbackImageRef.current, {
+          rotate: 150,
+          duration: 2,
+          y: 100,
+          ease: 'power1.inOut',
+          scrollTrigger: {
+
+            trigger: menuRef.current,
+            start: "top 80%",
+            end: "bottom bottom",
+            scrub: true,
+          }
+        })
+      }
       menuTimeline.to(cookerRef.current, {
         yPercent: 100,
-        xPercent:-50,
+        xPercent: -50,
         duration: 1,
         ease: "power2.out",
       });
     }, procedureRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [useModel]);
 
   // ScrollSmoother + Observer Snap
   useEffect(() => {
@@ -136,8 +181,8 @@ useEffect(() => {
     });
 
     //const sections = gsap.utils.toArray(".snap-section");
-    const sections = gsap.utils.toArray(".snap-section"); 
-// now includes heroSection, painPointsSection, menuSection, menuListSection
+    const sections = gsap.utils.toArray(".snap-section");
+    // now includes heroSection, painPointsSection, menuSection, menuListSection
 
     let currentIndex = 0;
     let isAnimating = false;
@@ -147,9 +192,9 @@ useEffect(() => {
       isAnimating = true;
       currentIndex = index;
       smoother.scrollTo(sections[index], {
-  duration: 1,         
-  ease: "power1.out", 
-});
+        duration: 1,
+        ease: "power1.out",
+      });
 
       gsap.delayedCall(1, () => (isAnimating = false));
     };
@@ -173,23 +218,38 @@ useEffect(() => {
   return (
     <div ref={wrapperRef} id="smooth-wrapper" className={styles.wrapper}>
       <section className={styles.logoSection} ref={logoSectionRef}>
-        <Logo loading={loading} finishLoadingProp={finishLoading} finishAnimationProp={finishAnimation}/>
+        <Logo loading={loading} finishLoadingProp={finishLoading} finishAnimationProp={finishAnimation} />
       </section>
       <div ref={contentRef} id="smooth-content" className={styles.content}>
 
         <section className={`${styles.heroSection} snap-section`} ref={heroSectionRef}>
-          <LessHeroSection logoAnimationCompleteProp={logoAnimationComplete}/>
+          <LessHeroSection logoAnimationCompleteProp={logoAnimationComplete} />
         </section>
 
         <div className={styles.cookerContainerWrapper}>
           <div className={styles.cookerContainer} ref={cookerRef}>
-            <Canvas>
-              <CookerScene
-                progress={progress}
-                storyTellingProgress={menuProgress}
-                loadingProgress={(p) => logoLoadingProgress(p)}
-              />
-            </Canvas>
+            {useModel ? (
+              <Canvas>
+                <CookerScene
+                  progress={progress}
+                  storyTellingProgress={menuProgress}
+                  loadingProgress={(p) => logoLoadingProgress(p)}
+                  onFallback={handleFallback}
+                />
+              </Canvas>
+            ) : (
+              <div className={styles.fallBackImage}>
+                <div
+                  ref={fallbackImageRef}>
+
+                  <Image
+                    src='/foodplate.png'
+                    alt='fallback'
+                    width={250}
+                    height={250}
+                  />
+                </div>
+              </div>)}
           </div>
         </div>
 
@@ -204,7 +264,7 @@ useEffect(() => {
           <Menu />
         </section>
         <section className={`${styles.menuListSection} snap-section`}>
-          <MenuList/>
+          <MenuList />
         </section>
       </div>
     </div>

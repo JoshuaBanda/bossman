@@ -10,7 +10,7 @@ import ObjectLogger from './OnjectLogger';
 import { useFrame } from '@react-three/fiber';
 
 
-const CookerScene = ({ progress, storyTellingProgress = 0, loadingProgress }) => {
+const CookerScene = ({ progress, storyTellingProgress = 0, loadingProgress,onFallback }) => {
 
   const cameraRef = useRef();
   const cookerRef = useRef();
@@ -123,22 +123,51 @@ const CookerScene = ({ progress, storyTellingProgress = 0, loadingProgress }) =>
 
 
 
+const { progress: loaderProgress, active } = useProgress();
+const doneRef = useRef(false);
+const fallbackLoggedRef = useRef(false);
+const [timeoutReached, setTimeoutReached] = React.useState(false);
 
-  const { progress: loaderProgress, active } = useProgress();
-  const doneRef = useRef(false);
 
-  useFrame(() => {
-    if (doneRef.current) return;
+// run fallback timeout once
+useEffect(() => {
+  // only if loading is still active
+  if (doneRef.current) return;
 
-    if (active) {
-      // report actual loader progress
-      loadingProgress(loaderProgress / 100);
-    } else {
-      // loading finished, make sure progress reaches 1
+  const timeout = setTimeout(() => {
+    // mark fallback reached
+    setTimeoutReached(true);
+
+    // finish loading if not done
+    if (!doneRef.current) {
       loadingProgress(1);
-      doneRef.current = true; // stop further updates
+      doneRef.current = true;
     }
-  });
+  }, 9000);
+
+  return () => clearTimeout(timeout);
+}, []); // <- only run once per mount
+
+// log fallback exactly once
+  useEffect(() => {
+    if (timeoutReached && !fallbackLoggedRef.current) {
+      fallbackLoggedRef.current = true;
+      console.log("fallback.........."); // child log
+      if (onFallback) onFallback(); // call parent function
+    }
+  }, [timeoutReached, onFallback]);
+
+
+useFrame(() => {
+  if (doneRef.current) return;
+
+  if (active) {
+    loadingProgress(loaderProgress / 100);
+  } else {
+    loadingProgress(1);
+    doneRef.current = true;
+  }
+});
 
 
   //console.log('progress:',progress,'loadingprogress:',loaderProgress);
