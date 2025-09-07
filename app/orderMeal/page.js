@@ -1,10 +1,12 @@
 'use client';
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './styles/orderMeal.module.css';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import Loading from '@/components/Loading/Loading';
 
 const page = () => {
+    const [isLoading,setIsLoading]=useState(false);
 const router=useRouter();
     const mealQuery={
         mealName:'Rice and chicken',
@@ -20,6 +22,7 @@ const router=useRouter();
     }
 
 const handleOrderNowButton = () => {
+    setIsLoading(true);
   const payload = {
     meal: mealQuery,
     user,
@@ -66,7 +69,14 @@ const handleOrderNowButton = () => {
     })
     return (
         <div className={styles.container}>
-            <div className={styles.orderItemContainer}>
+            {isLoading?
+            (
+                <div>
+                    <Loading/>
+                </div>
+            ):(
+                <>
+                 <div className={styles.orderItemContainer}>
                 <div className={styles.orderItemImage}>
                     <Image
                         src='/foodplate.png'
@@ -186,6 +196,9 @@ const handleOrderNowButton = () => {
                     </ul>
                 </div>
             </div>
+                </>
+            )}
+           
         </div>
     )
 }

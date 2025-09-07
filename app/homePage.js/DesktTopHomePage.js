@@ -118,7 +118,7 @@ const DesktTopHomePage = () => {
           }
         })
       }
-      gsap.to(cookerRef.current, {
+      /*gsap.to(cookerRef.current, {
         y: 0,
         duration: 1,
         ease: "power2.inOut",
@@ -127,7 +127,7 @@ const DesktTopHomePage = () => {
           start: "top 50%",
           end: "bottom 90%",
         },
-      });
+      });*/
 
       // Menu Timeline
       const menuTimeline = gsap.timeline({
@@ -159,11 +159,16 @@ const DesktTopHomePage = () => {
         })
       }
       menuTimeline.to(cookerRef.current, {
-        yPercent: 100,
+        yPercent: 10,
+        duration: 0.2,
+        ease: "power2.out",
+      })
+      .to(cookerRef.current,{
+        yPercent:90,
         xPercent: -50,
         duration: 1,
-        ease: "power2.out",
-      });
+        ease: "power2.inOut",
+      })
     }, procedureRef);
 
     return () => ctx.revert();

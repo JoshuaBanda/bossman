@@ -143,7 +143,7 @@ useEffect(() => {
       loadingProgress(1);
       doneRef.current = true;
     }
-  }, 15000);
+  }, 30000);
 
   return () => clearTimeout(timeout);
 }, []); // <- only run once per mount

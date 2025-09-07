@@ -1,0 +1,54 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.loaderContainer{
+    position: relative;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.spinBallContainer {
+  position: relative;
+  width: 50px; /* adjust as needed */
+  height: 50px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.spinBallContainer li {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+
+/* Position the three balls in a triangle */
+.spinBallContainer li:nth-of-type(1) {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  background-color: orangered;
+}
+
+.spinBallContainer li:nth-of-type(2) {
+  bottom: 0;
+  left: 0;
+  background-color: greenyellow;
+}
+
+.spinBallContainer li:nth-of-type(3) {
+  bottom: 0;
+  right: 0;
+  background-color: #222;
+  
+}

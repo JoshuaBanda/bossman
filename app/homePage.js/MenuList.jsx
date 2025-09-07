@@ -3,8 +3,12 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "./styles/menuList.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Loading from "@/components/Loading/Loading";
 
 const MenuList = () => {
+
+
+  const [isLoading, setIsLoading] = useState(false);
   const menuList = [
     { name: "Nsima and beef", photo: "/foodAssets/nsimaBeef2.jpg" },
     { name: "Nsima and chicken", photo: "/foodAssets/nsimaChicken.jpg" },
@@ -21,7 +25,7 @@ const MenuList = () => {
     { name: "Chips and beef", photo: "/foodAssets/fries.jpg" },
     { name: "Chips and chicken", photo: "/foodAssets/fries2.jpg" },
     { name: "Chips and fish", photo: "/foodAssets/fries.jpg" },
-    { name: "Spaghetti plain", photo: "/foodAssets/fries2.jpg" },
+    { name: "Chips plain", photo: "/foodAssets/fries2.jpg" },
   ];
 
   const [hoveredItem, setHoveredItem] = useState(null);
@@ -29,7 +33,7 @@ const MenuList = () => {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [isInView, setIsInView] = useState(false);
   const containerRef = useRef(null);
-  const router=useRouter();
+  const router = useRouter();
 
   // config for preview box size
   const followerWidth = 250;
@@ -80,125 +84,138 @@ const MenuList = () => {
 
   return (
     <div className={styles.container} ref={containerRef}>
-      <div className={styles.listItems}>
-        <ul>
-          {menuList.map((item, index) => (
-            <li
-              key={index}
-              onMouseEnter={() => handleHover(item)}
-              /*onMouseLeave={() => setHoveredItem(null)}*/
-              onClick={()=>{
-                router.push('/orderMeal')
-              }}
-            >
-              <div className={styles.name}>
-                {item.name}
-              </div>
-              <div className={styles.arrow}>
-                <svg
-                  height="60%"
-                  width="60%"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                  style={{
-                    transform: 'rotate(150deg)'
-                  }}
-                >
-                  <circle
-                    cx="12"
-                    cy="12"
-                    r="11"
-                    fill="none"
-                    stroke="orangered"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <polyline
-                    points="9 15 6 12 9 9"
-                    fill="none"
-                    stroke="orangered"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <line
-                    x1="6"
-                    y1="12"
-                    x2="18"
-                    y2="12"
-                    fill="none"
-                    stroke="orangered"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
 
-      {(hoveredItem || prevItem) && (
-        <div
-          className={styles.mouseFollower}
-          style={{
-            top: pos.y,
-            left: pos.x + 150,
-            width: followerWidth,
-            height: followerHeight,
-          }}
-        >
-          <div className={styles.imageWrapper}>
-            {prevItem && (
-              <Image
-                key={`prev-${prevItem.photo}`}   // 👈 unique key
-                src={prevItem.photo}
-                alt={prevItem.name}
-                fill
-                sizes="250px"
-                style={{
-                  objectFit: "cover",
-                  position: "absolute",
-                  inset: 0,
-                  opacity: 0,
-                  transition: "opacity 0.4s ease-in-out",
-                }}
-                onTransitionEnd={() => setPrevItem(null)}
-              />
-            )}
-
-            {hoveredItem && (
-              <Image
-                key={`current-${hoveredItem.photo}`}   // 👈 unique key
-                src={hoveredItem.photo}
-                alt={hoveredItem.name}
-                fill
-                sizes="250px"
-                style={{
-                  objectFit: "cover",
-                  position: "absolute",
-                  inset: 0,
-                  opacity: 1,
-                  transition: "opacity 0.4s ease-in-out",
-                }}
-              />
-            )}
-
+      {isLoading ?
+        (
+          <div>
+            <Loading />
           </div>
-        </div>
-      )}
-      <div className={styles.restaurantPhotosContainer}>
-        <Image
-        src='/restuarant.jpg'
-        alt="restaurant"
-        fill
-        priority
-        sizes="200px"
-        style={{objectFit:'cover'}}
-        />
-      </div>
+        ) : (
+          <>
+            <div className={styles.listItems}>
+              <ul>
+                {menuList.map((item, index) => (
+                  <li
+                    key={index}
+                    onMouseEnter={() => handleHover(item)}
+                    /*onMouseLeave={() => setHoveredItem(null)}*/
+                    onClick={() => {
+                      setIsLoading(true);
+                      router.push('/orderMeal')
+                    }}
+                  >
+                    <div className={styles.name}>
+                      {item.name}
+                    </div>
+                    <div className={styles.arrow}>
+                      <svg
+                        height="60%"
+                        width="60%"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        style={{
+                          transform: 'rotate(150deg)'
+                        }}
+                      >
+                        <circle
+                          cx="12"
+                          cy="12"
+                          r="11"
+                          fill="none"
+                          stroke="orangered"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <polyline
+                          points="9 15 6 12 9 9"
+                          fill="none"
+                          stroke="orangered"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <line
+                          x1="6"
+                          y1="12"
+                          x2="18"
+                          y2="12"
+                          fill="none"
+                          stroke="orangered"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {(hoveredItem || prevItem) && (
+              <div
+                className={styles.mouseFollower}
+                style={{
+                  top: pos.y,
+                  left: pos.x + 150,
+                  width: followerWidth,
+                  height: followerHeight,
+                }}
+              >
+                <div className={styles.imageWrapper}>
+                  {prevItem && (
+                    <Image
+                      key={`prev-${prevItem.photo}`}   // 👈 unique key
+                      src={prevItem.photo}
+                      alt={prevItem.name}
+                      fill
+                      priority
+                      sizes="250px"
+                      style={{
+                        objectFit: "cover",
+                        position: "absolute",
+                        inset: 0,
+                        opacity: 0,
+                        transition: "opacity 0.4s ease-in-out",
+                      }}
+                      onTransitionEnd={() => setPrevItem(null)}
+                    />
+                  )}
+
+                  {hoveredItem && (
+                    <Image
+                      key={`current-${hoveredItem.photo}`}   // 👈 unique key
+                      src={hoveredItem.photo}
+                      alt={hoveredItem.name}
+                      fill
+                      sizes="250px"
+                      style={{
+                        objectFit: "cover",
+                        position: "absolute",
+                        inset: 0,
+                        opacity: 1,
+                        transition: "opacity 0.4s ease-in-out",
+                      }}
+                    />
+                  )}
+
+                </div>
+              </div>
+            )}
+            <div className={styles.restaurantPhotosContainer}>
+              <Image
+                src='/restuarant.jpg'
+                alt="restaurant"
+                fill
+                priority
+                sizes="200px"
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
+          </>
+        )}
+
     </div>
   );
 };
