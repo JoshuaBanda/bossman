@@ -1,0 +1,49 @@
+/* mobileHomePage.module.css */
+
+/* Wrapper for ScrollSmoother */
+.wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Required by ScrollSmoother */
+#smooth-wrapper {
+  height: 100%;
+  overflow: hidden;
+}
+#smooth-content {
+  will-change: transform;
+}
+
+/* Each snap section */
+.snap-section {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: start;
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+}
+
+
+
+/* Optional: Scene container for 3D Canvas */
+.sceneContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* behind content */
+}
+
+.secondSection,.thirdSection{
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}

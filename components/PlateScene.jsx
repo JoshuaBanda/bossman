@@ -8,9 +8,10 @@ import FryingPan from './FryingPan';
 import Salad from './Salad';
 import ObjectLogger from './OnjectLogger';
 import { useFrame } from '@react-three/fiber';
+import MobileCooker from './MobileCooker';
 
 
-const CookerScene = ({ progress, storyTellingProgress = 0, loadingProgress,onFallback }) => {
+const PlateScene = ({ progress=0, storyTellingProgress = 0, loadingProgress,onFallback }) => {
 
   const cameraRef = useRef();
   const cookerRef = useRef();
@@ -21,13 +22,13 @@ const CookerScene = ({ progress, storyTellingProgress = 0, loadingProgress,onFal
   const initialPositions = {
     salad: [-0.2, 0.69, -0.35],
     pan: [0.23, 0.72, 0.12],
-    cooker: [0, 0, 0],
+    cooker: [0, -2, 0],
   };
 
   const targetPositions = {
     salad: [0.275, 1.5, -0.2],
     pan: [0, 1, -0.3],
-    cooker: [0, -0.8, 0.],
+    cooker: [0, 0, 0.],
   };
   useLayoutEffect(() => {
     if (typeof storyTellingProgress !== "number") return;
@@ -177,9 +178,9 @@ useFrame(() => {
       <OrbitControls enableZoom={false} enableRotate={true} />
       <ambientLight intensity={1.5} />
 
-      <group ref={cookerRef}>
+      <group>
         <Suspense fallback={null}>
-          <Cooker />
+          <MobileCooker ref={cookerRef}/>
         </Suspense>
         <Suspense fallback={null}>
           <FryingPan ref={panRef} scale={0.2} position={initialPositions.pan} />
@@ -195,4 +196,4 @@ useFrame(() => {
   );
 };
 
-export default CookerScene;
+export default PlateScene;

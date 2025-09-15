@@ -1,0 +1,45 @@
+.container{
+    width: 100vw;
+    height: 100dvh;
+    position: relative;
+}
+.brandName{
+    position: absolute;
+    width: 100vw;
+    font-weight: 900;
+    letter-spacing: 10px;
+    display: flex;
+    justify-content: center;
+    top: 40vh;
+    font-size: 2.5em;
+    color: aliceblue;
+
+}
+.leavesContainer{
+    width: 100vw;
+    height: 200px;
+    position: absolute;
+    bottom: 0px;
+    display: flex;
+    flex-direction: row;
+}
+.leavesContainer div{
+    width: 40%;
+    height: 100%;
+}
+.leavesContainer > div:nth-child(1) {
+    transform: rotate(320deg) translateY(30px) translateX(-40px);
+}
+
+.leavesContainer > div:nth-child(2) {
+  transform:  rotate(40deg);
+}
+
+.plateContainer{
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 200px;
+}

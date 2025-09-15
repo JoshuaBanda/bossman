@@ -1,0 +1,156 @@
+.container{
+    width: 100vw;
+    height: 100dvh;
+}
+
+.headerContainer{
+    width: 100vw;
+    height: 15dvh;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+.header{
+    width: 45vw;
+    height: 10dvh;
+  font-weight: 900;
+  font-size: 1.1em;
+  text-align: center;
+}
+.firstMeal,.secondMeal,.thirdMeal,.fourthMeal{
+    width: 50vw;
+}
+
+
+.mainContent{
+height: 85dvh;
+width: 100vw;
+display: flex;
+justify-content: center;
+align-items: end;
+}
+.mainContent ul{
+    width: 300px;
+    /* replace width with dynamic values later*/
+    height: 95%;
+    list-style: none;
+    display: grid;
+    position: relative;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: repeat(12,1fr);
+    gap: 40px 20px;
+}
+.mainContent ul li{
+    width: 100%;
+    background-color: aliceblue;
+    margin: 0px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.103);
+    transition: transform 0.4s ease-in-out;
+    opacity: 0;
+    transform: translateY(500px);
+}
+.mainContent ul li:hover{
+    transform: scale(1.05);
+}
+.firstMeal{
+    grid-column: 1/3;
+    grid-row: 1/7;
+}
+.secondMeal{
+    grid-column: 3/6;
+    grid-row: 1/5;
+}
+.thirdMeal{
+    grid-column: 1/3;
+    grid-row: 7/12;
+}
+.fourthMeal{
+    grid-column: 3/6;
+    grid-row: 5/9;
+}
+.fifthMeal{
+    grid-column: 3/6;
+    grid-row: 9/12;
+}
+
+
+
+
+
+.imageWrapper{
+    position: relative;
+    width: 100%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.imageWrapper img{
+    transition: transform 0.4s ease-in-out;
+}
+.imageWrapper:hover img{
+    transform: rotate(45deg) scale(1.1);
+}
+.info{
+    position: relative;
+    height: 20%;
+    width: 100%;
+}
+.ratingsContainer{
+    font-size: 12px;
+    letter-spacing: 0px;
+    position: relative;
+    width: 90%;
+    height: 25px;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+.ratings{
+    width: 55px;
+    height: 20px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+    color: white;
+}
+.firstMeal .mealNameContainer{
+    position: absolute;
+    bottom: -50px;
+    left: 0px;
+    font-weight: 900;
+    font-size: 15px;
+}
+
+.secondMeal .mealNameContainer{
+    position: absolute;
+    bottom: -35px;
+    left: 0px;
+    font-weight: 900;
+    font-size: 15px;
+}
+.thirdMeal .mealNameContainer{
+    position: absolute;
+    bottom: -40px;
+    left: 0px;
+    font-weight: 900;
+    font-size: 15px;
+}
+
+.fourthMeal .mealNameContainer{
+    position: absolute;
+    bottom: -32px;
+    left: 0px;
+    font-weight: 900;
+    font-size: 15px;
+}
+.fifthMeal .mealNameContainer{
+    position: absolute;
+    bottom: -30px;
+    left: 0px;
+    font-weight: 900;
+    font-size: 15px;
+}

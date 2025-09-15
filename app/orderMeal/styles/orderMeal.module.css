@@ -140,16 +140,18 @@
   font-size: 20px;
   width: 40px;
   color: #222;
+  background-color: silver;
   height: 40px;
   border-radius: 50%;
   align-items: center;
   justify-content: center;
-  transition: transform 0.4s ease-in-out, background-color 0.4s ease-in-out,color 0.4s ease-in-out;
+  transition: transform 0.4s ease-in-out, background-color 0.4s ease-in-out,color 0.4s ease-in-out, color 0.4s ease-in-out,color 0.4s ease-in-out;
 }
 .help:hover{
     transform: translateY(-5px);
     background-color: #222;
     color: aliceblue;
+    cursor: pointer;
 }
 .help:hover + .helpInfo {
   transform: translateX(0px);
@@ -305,4 +307,18 @@
     font-size: 12px;
     display: flex;
     justify-content: end;
+}
+
+.decolativeStyles{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+
+}
+.topShape{
+    height: 60vh;
+    width: 50vw;
+    position: absolute;
+    left: -20vw;
+    top: -20vh;
 }

@@ -1,0 +1,116 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: flex;
+}
+
+.sideBar {
+  height: 100%;
+  width: 50px;
+  background-color: orangered;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 1;
+}
+
+.sideBar ul {
+  width: 50px;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sideBar ul li {
+  height: 12vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.sideBar ul li span {
+  display: inline-block;
+  transform: rotate(-90deg);
+  white-space: nowrap;
+  z-index: 1;
+  font-size: 14px;
+}
+
+.selectedContainerSvg {
+  width: 50px;
+  height: 90px;
+  position: absolute;
+  top: 0;
+  left: 0px;
+  transform: translateY(-10px);
+  z-index: 0;
+
+  transition: transform 0.4s ease; /* smooth movement */
+}
+
+.selectedContainerSvg svg{
+    position: absolute;
+  transform: translateY(5px) translateX(10px) scale(1.7);
+}
+
+.menu{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid white;
+}
+.mainContent {
+  background-color: white;
+  width: 80%;  
+  height: 100%;
+  position: relative;
+  margin-left: 50px;
+}
+
+.headerContainer{
+    width: 90vw;
+    height: 15vh;
+    border: 1px solid pink;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+.header{
+    font-weight: 900;
+    font-size: 20px;
+    font-size: 25px;
+}
+.swiperContainer{
+    width: 300px;
+    height: 60vh;
+    background-color: red;
+    overflow: hidden;
+    
+}
+.swiperContainer ul{
+    list-style: none;
+    width: 500px;
+    background-color: bisque;
+    height: 100%;
+    position: relative;
+    overflow-x: auto;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    white-space: nowrap;
+}
+.swiperContainer ul li{
+    width: 250px;
+    border: 1px solid wheat;
+}

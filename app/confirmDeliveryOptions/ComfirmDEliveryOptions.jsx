@@ -82,7 +82,7 @@ const ConfirmDeliveryOptions = () => {
             <div className={styles.mealName}>{meal.mealName}</div>
             <div className={styles.quantity}>quantity: <span>{meal.quantity}</span></div>
             <div className={styles.price} id='primaryColorTwo'>
-              Mk {meal.price * meal.quantity}
+              Mk {(meal.price) * (meal.quantity)}
             </div>
           </div>
         )}

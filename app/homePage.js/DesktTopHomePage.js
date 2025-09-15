@@ -48,14 +48,14 @@ const DesktTopHomePage = () => {
   useEffect(() => {
     if (finishLoading && logoAnimationComplete && !hasLoggedRef.current) {
       hasLoggedRef.current = true; // prevent running again
-      console.log('done.........');
+      //console.log('done.........');
 
       const ctx = gsap.context(() => {
-        gsap.timeline({ delay: 2 })
+        gsap.timeline({ delay: 0.5 })
           .to(logoSectionRef.current, {
-            yPercent: -100,
+            //yPercent: -100,
             opacity: 0,
-            duration: 2,
+            duration: 1,
             onComplete: () => {
               // optional: remove from DOM
               if (logoSectionRef.current) {
@@ -81,7 +81,7 @@ const DesktTopHomePage = () => {
   useEffect(() => {
     if (loading >= 0.8 && !finishLoading) {
       setFinishLoading(true);
-      console.log('finish loading triggered'); // ✅ works
+      //console.log('finish loading triggered'); // ✅ works
     }
   }, [loading, finishLoading]);
 
@@ -135,7 +135,7 @@ const DesktTopHomePage = () => {
           trigger: menuRef.current,
           start: "top 80%",
           end: "bottom bottom",
-          scrub: true,
+          toggleActions: "play none none reverse",
           onUpdate: (self) => {
             setMenuProgress(self.progress);
           },
@@ -146,36 +146,35 @@ const DesktTopHomePage = () => {
       if (!useModel) {
         gsap.to(fallbackImageRef.current, {
           rotate: 150,
-          duration: 2,
           y: 100,
+          duration: 0.5,
           ease: 'power1.inOut',
           scrollTrigger: {
-
             trigger: menuRef.current,
-            start: "top 80%",
+            start: "top 50%",
             end: "bottom bottom",
-            scrub: true,
+            toggleActions: "play none none reverse", // play on enter, reverse on leave
           }
-        })
+        });
       }
       menuTimeline.to(cookerRef.current, {
-        yPercent: 10,
-        duration: 0.2,
-        ease: "power2.out",
+        yPercent: -5,
+        duration: 0.1,
+        ease: "none",
       })
-      .to(cookerRef.current,{
-        yPercent:90,
-        xPercent: -50,
-        duration: 1,
-        ease: "power2.inOut",
-      })
+        .to(cookerRef.current, {
+          yPercent: 80,
+          xPercent: -50,
+          duration: 0.2,
+          ease: "power2.inOut",
+        }, '>')
     }, procedureRef);
 
     return () => ctx.revert();
   }, [useModel]);
 
   // ScrollSmoother + Observer Snap
- /* useEffect(() => {
+  useEffect(() => {
     if (typeof window === "undefined") return;
 
     const smoother = ScrollSmoother.create({
@@ -218,10 +217,10 @@ const DesktTopHomePage = () => {
       smoother.kill();
       Observer.getAll().forEach((obs) => obs.kill());
     };
-  }, []);*/
+  }, []);
 
 
-  
+
 
   return (
     <div ref={wrapperRef} id="smooth-wrapper" className={styles.wrapper}>
