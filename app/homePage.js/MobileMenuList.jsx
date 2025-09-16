@@ -1,10 +1,11 @@
 'use client';
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './styles/mobileStyles/mobileMenuList.module.css';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import TextPlugin from 'gsap/TextPlugin';
+import { useRouter } from 'next/navigation';
 
 gsap.registerPlugin(ScrollTrigger,TextPlugin);
 const MobileMenuList = () => {
@@ -16,6 +17,19 @@ const MobileMenuList = () => {
     const thirdMealRef=useRef();
     const fourthMealRef=useRef();
     const fifthMealRef=useRef();
+
+    const router=useRouter();
+    const [isloading,setIsLoading]=useState(false);
+
+    const handleMealClick=(mealName)=>{
+                setIsLoading(true);
+        const payload = {
+            meal: mealName,
+        };
+
+        const encoded = encodeURIComponent(JSON.stringify(payload));
+        router.push(`/SelectRelish?data=${encoded}`)
+    }
 
 
     useEffect(()=>{
@@ -78,7 +92,7 @@ const MobileMenuList = () => {
         <div className={styles.mainContent}>
             {/* meal list */}
             <ul>
-                <li className={styles.firstMeal} ref={firstMealRef}>
+                <li className={styles.firstMeal} ref={firstMealRef} onClick={()=>handleMealClick('Rice')}>
                     <div className={styles.imageWrapper}>
                         <Image
                         src='/foodplate.png'
@@ -99,7 +113,7 @@ const MobileMenuList = () => {
                         </div>
                     </div>
                 </li>
-                <li className={styles.secondMeal} ref={secondMealRef}>
+                <li className={styles.secondMeal} ref={secondMealRef} onClick={()=>handleMealClick('Spaghetti')}>
                     <div className={styles.imageWrapper}>
                         <Image
                         src='/foodplate.png'
@@ -115,12 +129,12 @@ const MobileMenuList = () => {
                                 * * * 4.5
                             </div>
                             <div className={styles.mealNameContainer}>
-                                Rice
+                                Spaghetti
                             </div>
                         </div>
                     </div>
                 </li>
-                <li className={styles.thirdMeal} ref={thirdMealRef}>
+                <li className={styles.thirdMeal} ref={thirdMealRef} onClick={()=>handleMealClick('Nsima')}>
                     <div className={styles.imageWrapper}>
                         <Image
                         src='/foodplate.png'
@@ -136,12 +150,12 @@ const MobileMenuList = () => {
                                 * * * 4.5
                             </div>
                             <div className={styles.mealNameContainer}>
-                                Rice
+                                Nsima
                             </div>
                         </div>
                     </div>
                 </li>
-                <li className={styles.fourthMeal} ref={fourthMealRef}>
+                <li className={styles.fourthMeal} ref={fourthMealRef} onClick={()=>handleMealClick('Chips')}>
                     <div className={styles.imageWrapper}>
                         <Image
                         src='/foodplate.png'
@@ -157,7 +171,7 @@ const MobileMenuList = () => {
                                 * * * 4.5
                             </div>
                             <div className={styles.mealNameContainer}>
-                                Rice
+                                Chips
                             </div>
                         </div>
                     </div>

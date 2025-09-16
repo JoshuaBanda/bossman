@@ -42,8 +42,9 @@
   z-index: -1; /* behind content */
 }
 
-.secondSection,.thirdSection{
+.secondSection,.thirdSection,.threeDLandingSection{
   width: 100vw;
   height: 100vh;
   position: relative;
 }
+

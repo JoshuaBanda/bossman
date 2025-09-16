@@ -91,8 +91,8 @@ const MobileHomePage = () => {
  Observer.create({
       target: window,
       type: 'touch,wheel',
-  onUp: () => snapToSection(currentIndex + 1),   // 👈 flip
-  onDown: () => snapToSection(currentIndex - 1), // 👈 flip
+  onUp: () => snapToSection(currentIndex + 1),
+  onDown: () => snapToSection(currentIndex - 1),
       tolerance: 10,
       preventDefault: true,
       wheelSpeed: 1,
@@ -162,6 +162,8 @@ const MobileHomePage = () => {
         {/* Section 3 */}
         <section className={`${styles.thirdSection} snap-section`}>
           <MobileMenuList/>
+        </section>
+        <section className={`${styles.threeDLandingSection} snap-section`}>
         </section>
       </div>
     </div>
