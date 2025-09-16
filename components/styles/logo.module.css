@@ -151,7 +151,7 @@
 
 .loadingBar {
   background-color: #200e00;
-  width: 20%;
+  width: 40%;
   height: 5px;
   border-radius: 20px;
   overflow: hidden; /* ensures fill doesn't overflow */

@@ -42,9 +42,38 @@
   z-index: -1; /* behind content */
 }
 
-.secondSection,.thirdSection,.threeDLandingSection{
+.secondSection,.thirdSection,.threeDLandingSection,.threeDFinalSection,.procedure{
   width: 100vw;
   height: 100vh;
   position: relative;
 }
 
+.logoSection{
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  background-color: white;
+  z-index: 10;
+}
+
+
+
+.fallBackImage{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cookerContainerWrapper{
+    width: 100vw;
+    display: flex;
+    justify-content: end;
+}
+.cookerContainer{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 300vh;
+}

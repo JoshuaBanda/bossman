@@ -118,7 +118,7 @@ const DesktTopHomePage = () => {
           }
         })
       }
-      /*gsap.to(cookerRef.current, {
+      gsap.to(cookerRef.current, {
         y: 0,
         duration: 1,
         ease: "power2.inOut",
@@ -127,7 +127,7 @@ const DesktTopHomePage = () => {
           start: "top 50%",
           end: "bottom 90%",
         },
-      });*/
+      });
 
       // Menu Timeline
       const menuTimeline = gsap.timeline({

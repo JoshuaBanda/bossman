@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import TextPlugin from 'gsap/TextPlugin';
 import { useRouter } from 'next/navigation';
+import RatingIcon from '@/components/svgs/RatingIcon';
 
 gsap.registerPlugin(ScrollTrigger,TextPlugin);
 const MobileMenuList = () => {
@@ -40,7 +41,6 @@ const MobileMenuList = () => {
                 trigger:menuListContainerRef.current,
                 start:'top 50%',
                 end:'bottom bottom',
-                markers:true,
             }})
             .to(headerTextRef.current,{
                 text:'Browse our menu, get new favorite dishes',
@@ -105,7 +105,12 @@ const MobileMenuList = () => {
                     <div className={styles.info}>
                         <div className={styles.ratingsContainer}>
                             <div className={styles.ratings} id='primaryBackgroundColorTwo'>
-                                * * * 4.5
+                                 <div className={styles.ratingIcon}>
+                                    <RatingIcon/>
+                                 </div>
+                                 <div className={styles.ratingString}>
+                                    4.5
+                                 </div>
                             </div>
                             <div className={styles.mealNameContainer}>
                                 Rice
@@ -126,7 +131,12 @@ const MobileMenuList = () => {
                     <div className={styles.info}>
                         <div className={styles.ratingsContainer}>
                             <div className={styles.ratings} id='primaryBackgroundColorTwo'>
-                                * * * 4.5
+                                 <div className={styles.ratingIcon}>
+                                    <RatingIcon/>
+                                 </div>
+                                 <div className={styles.ratingString}>
+                                    4.5
+                                 </div>
                             </div>
                             <div className={styles.mealNameContainer}>
                                 Spaghetti
@@ -147,7 +157,12 @@ const MobileMenuList = () => {
                     <div className={styles.info}>
                         <div className={styles.ratingsContainer}>
                             <div className={styles.ratings} id='primaryBackgroundColorTwo'>
-                                * * * 4.5
+                                 <div className={styles.ratingIcon}>
+                                    <RatingIcon/>
+                                 </div>
+                                 <div className={styles.ratingString}>
+                                    4.5
+                                 </div>
                             </div>
                             <div className={styles.mealNameContainer}>
                                 Nsima
@@ -168,7 +183,12 @@ const MobileMenuList = () => {
                     <div className={styles.info}>
                         <div className={styles.ratingsContainer}>
                             <div className={styles.ratings} id='primaryBackgroundColorTwo'>
-                                * * * 4.5
+                                 <div className={styles.ratingIcon}>
+                                    <RatingIcon/>
+                                 </div>
+                                 <div className={styles.ratingString}>
+                                    4.5
+                                 </div>
                             </div>
                             <div className={styles.mealNameContainer}>
                                 Chips
@@ -185,11 +205,10 @@ const MobileMenuList = () => {
                         </div>
                     </div>
                     <div className={styles.info}>
-                        <div className={styles.ratingsContainer}>
                             <div className={styles.mealNameContainer}>
                                 Custome meal
                             </div>
-                        </div>
+                        
                     </div>
                 </li>
             </ul>

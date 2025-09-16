@@ -1,66 +1,56 @@
 'use client';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { Observer } from 'gsap/Observer';
-import React, { useEffect, useRef, useState } from 'react';
+import { Canvas } from '@react-three/fiber';
 
 import LandingPage from './mobile/LandingPage';
 import HandSection from './mobile/HandSection';
-import styles from './styles/mobileStyles/mobileHomePage.module.css';
 import MobileMenuList from './MobileMenuList';
-// import { Canvas } from '@react-three/fiber';
-// import PlateScene from '@/components/PlateScene';
+import Logo from '@/components/Logo';
+import CookerScene from '@/components/CookerScene';
+import styles from './styles/mobileStyles/mobileHomePage.module.css';
+import Image from 'next/image';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, Observer);
 
 const MobileHomePage = () => {
-  const landingRef = useRef();
-  const handSectionRef = useRef();
+  // Refs
   const wrapperRef = useRef();
   const contentRef = useRef();
+  const landingRef = useRef();
+  const handSectionRef = useRef();
+  const threeDLandingSectionRef = useRef();
+  const threeDFinalSectionRef = useRef();
+  const logoSectionRef = useRef();
+  const procedureRef = useRef();
+  const cookerRef = useRef();
+  const menuRef = useRef();
+  const fallbackImageRef = useRef();
 
-  const [handProgress, setHandProgress] = useState(0);
-  const [storyProgress, setStoryProgress] = useState(0);
+  // States
+  const [progress, setProgress] = useState(0);
+  const [threeDFinalSection, setThreeDFinalSection] = useState(0);
+  const [loading, setLoading] = useState(0);
+  const [finishLoading, setFinishLoading] = useState(false);
+  const [logoAnimationComplete, setLogoAnimationComplete] = useState(false);
+  const [useModel, setUseModel] = useState(true);
 
-  // Pin first section
-  /* useEffect(() => {
-     if (!landingRef.current) return;
- 
-     const ctx = gsap.context(() => {
-       ScrollTrigger.create({
-         trigger: landingRef.current,
-         start: 'top top',
-         end: '+=100%',
-         pin: true,
-         pinSpacing: false, // allows section 2 to overlap
-       });
-     });
- 
-     return () => ctx.revert();
-   }, []);*/
+  const hasLoggedRef = useRef(false);
 
-  // Hand section scroll animation
-  /*useEffect(() => {
-    if (!handSectionRef.current) return;
 
-    const ctx = gsap.context(() => {
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: handSectionRef.current,
-          start: 'bottom bottom',
-          end: 'bottom top',
-          scrub: true,
-          markers: true,
-          onUpdate: (self) => setHandProgress(self.progress),
-        },
-      });
-    });
+    const handleFallback = () => {
+    console.log("Fallback triggered from child!");
+    setUseModel(false);
+    // You can also update state, trigger animations, etc.
+  };
 
-    return () => ctx.revert();
-  }, []);*/
 
-  // ScrollSmoother + Observer Snap
+  /** ------------------------
+   * Scroll Smoother + Snap
+   ------------------------- */
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
@@ -68,8 +58,8 @@ const MobileHomePage = () => {
       wrapper: wrapperRef.current,
       content: contentRef.current,
       smooth: 1,
+      smoothTouch: 4,
       effects: true,
-      smoothTouch:4,
     });
 
     const sections = gsap.utils.toArray('.snap-section');
@@ -80,6 +70,7 @@ const MobileHomePage = () => {
       if (isAnimating || index < 0 || index >= sections.length) return;
       isAnimating = true;
       currentIndex = index;
+
       smoother.scrollTo(sections[index], {
         duration: 2,
         ease: 'power2.inOut',
@@ -88,16 +79,15 @@ const MobileHomePage = () => {
       gsap.delayedCall(1, () => (isAnimating = false));
     };
 
- Observer.create({
+    Observer.create({
       target: window,
       type: 'touch,wheel',
-  onUp: () => snapToSection(currentIndex + 1),
-  onDown: () => snapToSection(currentIndex - 1),
+      onUp: () => snapToSection(currentIndex + 1),
+      onDown: () => snapToSection(currentIndex - 1),
       tolerance: 10,
       preventDefault: true,
       wheelSpeed: 1,
     });
-
 
     return () => {
       smoother.kill();
@@ -105,12 +95,12 @@ const MobileHomePage = () => {
     };
   }, []);
 
+  /** ------------------------
+   * Background Animation
+   ------------------------- */
   useEffect(() => {
     const ctx = gsap.context(() => {
-
-      gsap.set(contentRef.current, {
-        backgroundColor: 'orangered'
-      })
+      gsap.set(contentRef.current, { backgroundColor: 'orangered' });
 
       gsap.to(contentRef.current, {
         scrollTrigger: {
@@ -119,51 +109,179 @@ const MobileHomePage = () => {
           end: 'bottom center',
           scrub: true,
         },
-        backgroundColor:'white'
-      })
-
-
+        backgroundColor: 'white',
+      });
     });
+    return () => ctx.revert();
+  }, []);
 
+  /** ------------------------
+   * Logo Section Exit
+   ------------------------- */
+  useEffect(() => {
+    if (finishLoading && logoAnimationComplete && !hasLoggedRef.current) {
+      hasLoggedRef.current = true;
+
+      const ctx = gsap.context(() => {
+        gsap.timeline({ delay: 0.5 }).to(logoSectionRef.current, {
+          opacity: 0,
+          duration: 1,
+          onComplete: () => {
+            if (logoSectionRef.current) {
+              logoSectionRef.current.style.display = 'none';
+              ScrollTrigger.refresh();
+            }
+          },
+        });
+      }, logoSectionRef);
+
+      return () => ctx.revert();
+    }
+  }, [finishLoading, logoAnimationComplete]);
+
+  /** ------------------------
+   * Loader Helpers
+   ------------------------- */
+  const finishAnimation = () => setLogoAnimationComplete(true);
+  const logoLoadingProgress = (p) => setLoading(p);
+
+  useEffect(() => {
+    if (loading >= 0.8 && !finishLoading) setFinishLoading(true);
+  }, [loading, finishLoading]);
+
+  /** ------------------------
+   * Cooker & Procedure Animations
+   ------------------------- */
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+    
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: threeDLandingSectionRef.current,
+          start: 'top 60%',
+          end: 'bottom bottom',
+          scrub: 2,
+          markers: true,
+          onUpdate: (self) => setProgress(self.progress),
+        },
+      });
+
+      if (!useModel) {
+        gsap.to(fallbackImageRef.current, {
+          rotate: 150,
+          duration: 2,
+          ease: 'power1.inOut',
+          scrollTrigger: {
+            trigger: threeDLandingSectionRef.current,
+            start: 'top 60%',
+            end: 'bottom bottom',
+            scrub: 2,
+          },
+        });
+      }
+
+      
+      const menuTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: threeDFinalSectionRef.current,
+          start: 'top 80%',
+          end: 'bottom bottom',
+          scrub:2,
+          onUpdate: (self) => setThreeDFinalSection(self.progress),
+        },
+      });
+
+      if (!useModel) {
+        gsap.to(fallbackImageRef.current, {
+          rotate: 150,
+          duration: 0.5,
+          ease: 'power1.inOut',
+          scrollTrigger: {
+            trigger: threeDFinalSectionRef.current,
+            start: 'top 50%',
+            end: 'bottom bottom',
+          scrub:2,
+          },
+        });
+      }
+
+      menuTimeline
+        .to(cookerRef.current, {
+          yPercent: 100,
+          duration: 0.2,
+          ease: 'power2.inOut',
+        });
+    }, threeDLandingSectionRef);
 
     return () => ctx.revert();
-  }, [])
+  }, [useModel]);
 
+  /** ------------------------
+   * Render
+   ------------------------- */
   return (
     <div ref={wrapperRef} id="smooth-wrapper" className={styles.wrapper}>
-      <div ref={contentRef} id="smooth-content">
-        {/* 3D Scene if needed */}
-        {/* <div className={styles.sceneContainer}>
-          <Canvas>
-            <PlateScene
-              progress={handProgress}
-              storyTellingProgress={storyProgress}
-              loadingProgress={(p) => console.log('Loading:', p)}
-            />
-          </Canvas>
-        </div> */}
+      {/* Logo Section */}
+      <section className={styles.logoSection} ref={logoSectionRef}>
+        <Logo
+          loading={loading}
+          finishLoadingProp={finishLoading}
+          finishAnimationProp={finishAnimation}
+        />
+      </section>
 
-        {/* Section 1 */}
-        <section
-          className={`${styles.landingSection} snap-section`}
-          ref={landingRef}
-        >
+      {/* Main Content */}
+      <div ref={contentRef} id="smooth-content">
+        {/* Cooker Scene / Fallback */}
+        <div className={styles.cookerContainerWrapper}>
+          <div className={styles.cookerContainer} ref={cookerRef}>
+            {useModel ? (
+              <Canvas>
+                <CookerScene
+                  progress={progress}
+                  storyTellingProgress={threeDFinalSection}
+                  loadingProgress={logoLoadingProgress}
+                  onFallback={() => handleFallback}
+                />
+              </Canvas>
+            ) : (
+              <div className={styles.fallBackImage}>
+                <div ref={fallbackImageRef}>
+                  <Image
+                    src="/foodplate.png"
+                    alt="fallback"
+                    width={250}
+                    height={250}
+                    priority={false}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Sections */}
+        <section className={`${styles.landingSection} snap-section`} ref={landingRef}>
           <LandingPage />
         </section>
 
-        {/* Section 2 */}
-        <section
-          className={`${styles.secondSection} snap-section`}
-          ref={handSectionRef}
-        >
+        <section className={`${styles.secondSection} snap-section`} ref={handSectionRef}>
           <HandSection />
         </section>
 
-        {/* Section 3 */}
-        <section className={`${styles.thirdSection} snap-section`}>
-          <MobileMenuList/>
+        <section className={`${styles.thirdSection} snap-section`} ref={menuRef}>
+          <MobileMenuList />
         </section>
-        <section className={`${styles.threeDLandingSection} snap-section`}>
+
+        <section className={`${styles.threeDLandingSection} snap-section`} ref={threeDLandingSectionRef} >
+          1
+        </section>
+        <section className={`${styles.threeDFinalSection} snap-section`} ref={threeDFinalSectionRef}>
+          2
+        </section>
+
+        <section ref={procedureRef} className={`${styles.procedure} snap-section`}>
+          procedure
         </section>
       </div>
     </div>
