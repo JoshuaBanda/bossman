@@ -14,7 +14,7 @@
 
 .logoSubContainer {
 
-  background-color: orangered;
+  background-color: #222;
   border-radius: 50%;
   height: 110px;
   width: 250px;
@@ -39,7 +39,7 @@
 
 .ridContainer,
 .plateContainer,
-.handContainer {
+.handContainer,.upperHandContainer {
   height: 90px;
   width: 90px;
 
@@ -103,24 +103,24 @@
 .folkContainer svg,
 .spoonContainer svg,
 .knifeContainer svg {
-  fill: orangered;
+  fill:black;
   fill-rule: evenodd;
   transform: scale(0.4);
 }
 
 .folkContainer {
-  transform: translateX(-15px) translateY(20px);
+  transform: translateX(-15px) translateY(22px);
   opacity: 0;
 }
 
 .knifeContainer {
-  transform: translateX(15px) translateY(20px);
+  transform: translateX(15px) translateY(22px);
   opacity: 0;
 }
 
 .spoonContainer{
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(22px);
 }
 
 
@@ -145,21 +145,47 @@
   justify-content: center;
   align-items: center;
   flex-direction:column;
-  color: orangered;
 }
 
 
 .loadingBar {
-  background-color: #200e00;
-  width: 40%;
+  background-color: #ecc5a7;
+  width: 300px;
   height: 5px;
   border-radius: 20px;
   overflow: hidden; /* ensures fill doesn't overflow */
 }
+@media (max-width:700px) {
+  .loadingBar{
+    width: 200px;
+  }
+}
 
 .loadingFill {
-  background-color: orangered;
+  background-color: rgb(54, 52, 52);
   height: 100%;
   width: 0%;
   border-radius: 20px;
+}
+
+
+.upperHandContainer{
+  transform:  translateX(80px) translateY(-80px) rotate(-130deg) scale(1.5);
+  opacity: 0;
+}
+
+.chefHatContainer{
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  z-index: -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-60px) translateY(-20px) scale(0.5);
+  opacity: 0;
+}
+
+.loading{
+  transform: translateY(20px);
 }

@@ -13,6 +13,7 @@ import Logo from '@/components/Logo';
 import CookerScene from '@/components/CookerScene';
 import styles from './styles/mobileStyles/mobileHomePage.module.css';
 import Image from 'next/image';
+import Procedures from './Procedures';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, Observer);
 
@@ -207,7 +208,7 @@ const MobileHomePage = () => {
 
       menuTimeline
         .to(cookerRef.current, {
-          yPercent: 100,
+          yPercent: 80,
           duration: 0.2,
           ease: 'power2.inOut',
         });
@@ -274,14 +275,17 @@ const MobileHomePage = () => {
         </section>
 
         <section className={`${styles.threeDLandingSection} snap-section`} ref={threeDLandingSectionRef} >
-          1
+          
         </section>
         <section className={`${styles.threeDFinalSection} snap-section`} ref={threeDFinalSectionRef}>
-          2
+          
         </section>
 
         <section ref={procedureRef} className={`${styles.procedure} snap-section`}>
-          procedure
+          <p>
+            Procedures
+          </p>
+          <Procedures/>
         </section>
       </div>
     </div>

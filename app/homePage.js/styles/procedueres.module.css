@@ -39,3 +39,49 @@ margin-bottom: 7vh;
     transform: translateY(100px);
     opacity: 0;
 }
+
+@media (max-width:700px) {
+  .container{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    position: relative;
+    
+}
+
+
+.cardsContainer{
+  position: absolute;
+
+ width: 90%;
+ left: 5vw;
+ height: 100%;
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+
+}
+.leftSideCardsDisplay {
+  list-style: none;
+  padding: 0;
+}
+
+.leftSideCardsDisplay li {
+margin-bottom: 7vh;
+}
+
+
+.rightSideCardsDisplay {
+  list-style: none;
+  padding: 0;
+}
+
+.rightSideCardsDisplay li {
+  margin-bottom: 8vh; /* adjust spacing */
+}
+.rightSideCardsDisplay li,.leftSideCardsDisplay li{
+    transform: translateY(100px);
+    opacity: 1;
+}
+  
+}

@@ -2,22 +2,25 @@
 import React, { useLayoutEffect, useRef, useEffect, useState } from 'react';
 import styles from './styles/logo.module.css';
 import gsap from 'gsap';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
 
-const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp ,finishAnimationProp,fallback = false}) => {
+const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp, finishAnimationProp }) => {
   const lettersRef = useRef(null);
   const loadingRef = useRef(null); // loading bar fill
   const handRef = useRef(null);
   const plateRef = useRef(null);
   const ridRef = useRef(null);
   const subContainerRef = useRef(null);
-  const spoonRef=useRef();
-  const folkRef=useRef();
-  const knifeRef=useRef();
+  const spoonRef = useRef();
+  const folkRef = useRef();
+  const knifeRef = useRef();
+  const upperHandRef = useRef();
+  const chefHatContainerRef = useRef();
 
   const [animationComplete, setAnimationComplete] = useState(false);
 
 
-  
 
   // Run finish callback when animation completes
   useLayoutEffect(() => {
@@ -39,7 +42,7 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp ,f
 
   // Logo animation
   useLayoutEffect(() => {
-    if(!finishLoadingProp) return;
+    if (!finishLoadingProp) return;
     const ctx = gsap.context(() => {
       const logoTimeline = gsap.timeline({
         onComplete: () => setAnimationComplete(true),
@@ -47,19 +50,19 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp ,f
 
       // Animate container fade in
       logoTimeline.to(handRef.current, {
-          y: -130,
-          opacity: 1,
-          duration: 1.5,
-          rotate:0,
-          scale:0.5,
-          ease: 'power1.in',
-        },)
-      .to(subContainerRef.current, {
+        y: -130,
         opacity: 1,
-        y: 0,
-        duration: 2,scale:1,
+        duration: 1.5,
+        rotate: 0,
+        scale: 0.5,
         ease: 'power1.in',
-      },'<');
+      },)
+        .to(subContainerRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 2, scale: 1,
+          ease: 'power1.in',
+        }, '<');
 
       // Animate text stroke independently
       const textEl = lettersRef.current;
@@ -74,39 +77,103 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp ,f
 
       // Animate shapes after text
       logoTimeline.to(plateRef.current, {
-          y: -65,
-          opacity: 1,
-          duration: 2,
-          ease: 'power1.inOut',
-        }, '<')
+        y: -65,
+        opacity: 1,
+        duration: 2,
+        ease: 'power1.inOut',
+      }, '<')
         .to(ridRef.current, {
-            y:0,
+          y: 0,
           opacity: 1,
           duration: 2,
           ease: 'power1.inOut',
         }, '<')
-        .to(spoonRef.current,{
-            y:0,
-            opacity:1,
-            duration:2,
-            ease:'power2.in'
-        },'<').to(folkRef.current,{
-            y:0,
-            opacity:1,
-            duration:1,
-            ease:'power2.inOut'
-        },'<')        .to(knifeRef.current,{
-            y:0,
-            opacity:1,
-            duration:1,
-            ease:'power2.inOut'
-        },'<')
+        .to(spoonRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 2,
+          ease: 'power2.in'
+        }, '<').to(folkRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: 'power2.inOut'
+        }, '<').to(knifeRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: 'power2.inOut'
+        }, '<')
         .to(textEl, {
           strokeDashoffset: 0,
           duration: 5,
           ease: 'power2.inOut',
-        },'<0.5'); // independent, not on timeline
-        
+        }, '<0.5')// independent, not on timeline
+        .to(subContainerRef.current, {
+          backgroundColor: 'transparent',
+          duration: 2,
+          ease: 'power1.out',
+        }, '<2')
+        .to(textEl, {
+          stroke: 'black',
+          duration: 1,
+          ease: 'power1.out',
+        }, '<0.5')
+        .to('#hand', {
+          fill: 'black',
+          ease: 'power1.out',
+          duration: 0.5,
+        }, '<')
+        .to('#plate', {
+          fill: 'black',
+          ease: 'power1.out',
+          duration: 0.5,
+        }, '<')
+        .to('#rid', {
+          fill: 'black',
+          ease: 'power1.out',
+          duration: 0.5,
+        }, '<')
+        .to('#folk', {
+          fill: 'black',
+          ease: 'power1.out',
+          duration: 0.5,
+        }, '<')
+        .to('#knife', {
+          fill: 'black',
+          ease: 'power1.out',
+          duration: 0.5,
+        }, '<')
+        .to('#spoon', {
+          fill: 'black',
+          ease: 'power1.out',
+          duration: 0.5,
+        }, '<')
+
+        .to(upperHandRef.current, {
+          y: -40,
+          x: 20,
+          rotate: '-=20',
+          ease: 'power2.inOut',
+          duration: 1,
+          opacity: 1,
+        }, '<')
+        .to(upperHandRef.current, { y: -90, x: 40, opacity: 0, rotate: '+=20', ease: 'power1.out' }, '>')
+        .to(ridRef.current, { y: -100, x: 20, rotate: '+=45', ease: 'power1.out', opacity: 0 }, '<')
+        .to(folkRef.current, { scale: 3, y: -30, ease: 'power1.out', duration: 1, x: -20 }, '<')
+        .to(spoonRef.current, { scale: 2.5, y: -22, ease: 'power1.out', duration: 1, x: -2 }, '<0.5')
+        .to(knifeRef.current, { scale: 2, y: -15, ease: 'power1.out', duration: 1 }, '<0.2')
+        .to(plateRef.current, { scale: 1.5, ease: 'power1.out', duration: 1 }, '<')
+        .to(chefHatContainerRef.current, {
+          rotate: '-=40',
+          duration: 4,
+          y: -50,
+          x: -130,
+          scale: 1,
+          opacity: 1,
+          ease: 'elastic.out'
+        }, '<')
+        .to(textEl, { scale: 1.2, x: -50, ease: 'power1.in', duration: 1 }, '<')
     });
 
     return () => ctx.revert();
@@ -135,6 +202,8 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp ,f
             </div>
           </div>
 
+
+
           <div className={styles.ridContainer} ref={ridRef}>
             <svg width="100%" height="100%" viewBox="0 0 1080 1080">
               <path id="rid" className={styles.rid} d="M598.2,330.442s322.605,48.5,400.62,347.906,27.408,105.427,27.408,105.427l-14.76,2.108H969.3s-23.194-337.364-352.124-400.62-10.543-2.108-10.543-2.108,303.628,90.666,305.737,402.728H37.334s25.3-411.162,438.574-455.441l29.519-2.109s-4.217-46.387-29.519-63.256,54.821-42.17,82.232-25.3,18.977,21.085,18.977,21.085-27.411,31.628-27.411,65.365Z" />
@@ -152,6 +221,20 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp ,f
               <path id="hand" d="M434.9,686.448S749.316,480.61,823.1,385.086s157.775-124.113,170.261-131.1,47.1-18.551,0-32.349-94.211,15.5-108.967,22.133S676.1,395.479,600.054,395.3s-82.294-21.956-110.67-73.213-61.862-117.3-112.373-103.859-2.27,35.932,6.811,59.592,23.269,49.553,15.323,91.941-3.973,44.445-3.4,61.294,6.243,64.877-74.915,107.264l6.811,18.729-28.945,15.324s1.135-16.849-8.513-17.026-158.343,69.806-158.343,69.806,106.7,170.439,114.075,229.853c0,0-10.783,20.609,27.242-3.4s125.993-78.32,125.993-78.32S386.659,734.3,378.714,713.69s5.108-32.349,5.108-32.349,11.35,8.69,17.026,17.026S434.9,686.448,434.9,686.448Z" />
             </svg>
           </div>
+        </div>
+
+        <div className={styles.upperHandContainer} ref={upperHandRef}>
+          <svg width="100%" height="100%" viewBox="0 0 1080 1080" stroke='orange'>
+            <path id="upperHand" d="M434.9,686.448S749.316,480.61,823.1,385.086s157.775-124.113,170.261-131.1,47.1-18.551,0-32.349-94.211,15.5-108.967,22.133S676.1,395.479,600.054,395.3s-82.294-21.956-110.67-73.213-61.862-117.3-112.373-103.859-2.27,35.932,6.811,59.592,23.269,49.553,15.323,91.941-3.973,44.445-3.4,61.294,6.243,64.877-74.915,107.264l6.811,18.729-28.945,15.324s1.135-16.849-8.513-17.026-158.343,69.806-158.343,69.806,106.7,170.439,114.075,229.853c0,0-10.783,20.609,27.242-3.4s125.993-78.32,125.993-78.32S386.659,734.3,378.714,713.69s5.108-32.349,5.108-32.349,11.35,8.69,17.026,17.026S434.9,686.448,434.9,686.448Z" />
+          </svg>
+        </div>
+        <div className={styles.chefHatContainer} ref={chefHatContainerRef}>
+          <Image
+            src='/logo/chefhat.png'
+            alt='hat'
+            width={100}
+            height={100}
+          />
         </div>
 
         {/* Brand Name */}
@@ -182,7 +265,24 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp ,f
         </div>
 
         <div className={styles.loading}>
-          {finishLoadingProp ? <p>welcome</p> : <p>Loading..</p>}
+          {finishLoadingProp ? <p>welcome</p> : <>
+            <motion.div
+              initial={{ x: 0, y: 0 }}
+              animate={{ x: 10 }}
+              transition={{
+                duration: 0.5,     // how long one cycle takes
+                repeat: Infinity,  // loop forever
+                repeatType: "reverse" // this is the "yoyo" effect
+              }}
+              style={{
+                width: "5px",
+                height: "5px",
+                borderRadius: "50%",
+                background: "black"
+              }}
+            />
+
+          </>}
         </div>
       </div>
     </div>

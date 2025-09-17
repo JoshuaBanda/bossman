@@ -23,12 +23,12 @@ const LandingPage = ({ brandName = 'Restaurant' }) => {
   trigger: containerRef.current,
   start: "bottom 95%",
   end: "bottom top",
-   scrub: 2
+   scrub: 3
 }
       });
 
       tl.to(firstLeafRef.current, {
-        y: 50,
+        y: 500,
         x: -30,
         scale: 1.5,
         rotation: "-=90",
@@ -36,7 +36,7 @@ const LandingPage = ({ brandName = 'Restaurant' }) => {
         opacity:0,
       })
         .to(secondLeafRef.current, {
-          y: -10,
+          y: 500,
           x: 30,
           scale: 1.5,
           rotation: "+=90",

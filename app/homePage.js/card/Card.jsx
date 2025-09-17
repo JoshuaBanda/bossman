@@ -10,7 +10,7 @@ const Card = ({ step, procedure }) => {
         {step}
       </div>
       <div className={styles.stepPhotoContainer}>
-        <svg height='40' width='40' viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+        <svg height='80%' width='80%' viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
         <g id="E-learning_on_phone" stroke='white' fill='white'>
           <path d="M147.7474,398.0528a15.8333,15.8333,0,1,0,15.8335,15.833A15.8508,15.8508,0,0,0,147.7474,398.0528Zm0,21.6665a5.8333,5.8333,0,1,1,5.8335-5.8335A5.84,5.84,0,0,1,147.7474,419.7193Z"/>
           <path d="M98.4384,152.9337H74.184a5,5,0,0,0-5,5V182.188a5,5,0,0,0,5,5H98.4384a5,5,0,0,0,5-5V157.9337A5,5,0,0,0,98.4384,152.9337Zm-5,24.2543H79.184V162.9337H93.4384Z"/>
