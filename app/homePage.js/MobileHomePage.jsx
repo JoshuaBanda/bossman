@@ -126,7 +126,7 @@ const MobileHomePage = () => {
       const ctx = gsap.context(() => {
         gsap.timeline({ delay: 0.5 }).to(logoSectionRef.current, {
           opacity: 0,
-          duration: 1,
+          duration: 2,
           onComplete: () => {
             if (logoSectionRef.current) {
               logoSectionRef.current.style.display = 'none';
@@ -162,7 +162,6 @@ const MobileHomePage = () => {
           start: 'top 60%',
           end: 'bottom bottom',
           scrub: 2,
-          markers: true,
           onUpdate: (self) => setProgress(self.progress),
         },
       });

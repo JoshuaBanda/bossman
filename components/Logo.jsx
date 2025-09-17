@@ -89,17 +89,17 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp, f
           ease: 'power1.inOut',
         }, '<')
         .to(spoonRef.current, {
-          y: 0,
+          y: -5,
           opacity: 1,
           duration: 2,
           ease: 'power2.in'
         }, '<').to(folkRef.current, {
-          y: 0,
+          y: -5,
           opacity: 1,
           duration: 1,
           ease: 'power2.inOut'
         }, '<').to(knifeRef.current, {
-          y: 0,
+          y: -5,
           opacity: 1,
           duration: 1,
           ease: 'power2.inOut'
@@ -111,7 +111,7 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp, f
         }, '<0.5')// independent, not on timeline
         .to(subContainerRef.current, {
           backgroundColor: 'transparent',
-          duration: 2,
+          duration: 3,
           ease: 'power1.out',
         }, '<2')
         .to(textEl, {

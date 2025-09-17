@@ -37,7 +37,7 @@ margin-bottom: 7vh;
 }
 .rightSideCardsDisplay li,.leftSideCardsDisplay li{
     transform: translateY(100px);
-    opacity: 0;
+    opacity: 1;
 }
 
 @media (max-width:700px) {
