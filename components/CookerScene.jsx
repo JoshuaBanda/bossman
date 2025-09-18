@@ -129,15 +129,25 @@ const fallbackLoggedRef = useRef(false);
 const [timeoutReached, setTimeoutReached] = React.useState(false);
 
 
+// run fallback timeout once
 useEffect(() => {
+  // only if loading is still active
   if (doneRef.current) return;
+
   const timeout = setTimeout(() => {
-    if (loaderProgress === 0) { // nothing loaded at all
-      onFallback?.();
+    // mark fallback reached
+    setTimeoutReached(true);
+
+    // finish loading if not done
+    if (!doneRef.current) {
+      loadingProgress(1);
+      doneRef.current = true;
+      console.log('................done')
     }
-  }, 15000);
+  }, 5000);
+
   return () => clearTimeout(timeout);
-}, [loaderProgress]);
+}, []); // <- only run once per mount
 
 
 // log fallback exactly once
