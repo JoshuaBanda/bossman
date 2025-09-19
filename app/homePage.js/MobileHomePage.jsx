@@ -159,26 +159,20 @@ const MobileHomePage = () => {
       gsap.timeline({
         scrollTrigger: {
           trigger: threeDLandingSectionRef.current,
-          start: 'top 60%',
+          start: 'top 80%',
           end: 'bottom bottom',
           scrub: 2,
           onUpdate: (self) => setProgress(self.progress),
         },
       })
-      .to(cookerRef.current,{
-        yPercent:100,
-        ease:'power1.out',
-        opacity:1
-      })
 
       if (!useModel) {
         gsap.to(fallbackImageRef.current, {
           rotate: 150,
-          duration: 2,
           ease: 'power1.inOut',
           scrollTrigger: {
             trigger: threeDLandingSectionRef.current,
-            start: 'top 90%',
+            start: 'top 80%',
             end: 'bottom bottom',
             scrub: 2,
           },
