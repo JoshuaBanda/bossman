@@ -142,13 +142,11 @@ useEffect(() => {
     if (!doneRef.current) {
       loadingProgress(1);
       doneRef.current = true;
-      console.log('................done')
     }
-  }, 5000);
+  }, 10000);
 
   return () => clearTimeout(timeout);
 }, []); // <- only run once per mount
-
 
 // log fallback exactly once
   useEffect(() => {

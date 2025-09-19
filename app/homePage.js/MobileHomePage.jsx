@@ -101,7 +101,7 @@ const MobileHomePage = () => {
    ------------------------- */
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set(contentRef.current, { backgroundColor: 'orangered' });
+      gsap.set(contentRef.current, { backgroundColor: 'rgba(0,0,0,0.7)' });
 
       gsap.to(contentRef.current, {
         scrollTrigger: {
