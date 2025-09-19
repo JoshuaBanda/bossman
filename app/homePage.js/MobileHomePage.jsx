@@ -164,7 +164,12 @@ const MobileHomePage = () => {
           scrub: 2,
           onUpdate: (self) => setProgress(self.progress),
         },
-      });
+      })
+      .to(cookerRef.current,{
+        yPercent:100,
+        ease:'power1.out',
+        opacity:1
+      })
 
       if (!useModel) {
         gsap.to(fallbackImageRef.current, {
@@ -173,7 +178,7 @@ const MobileHomePage = () => {
           ease: 'power1.inOut',
           scrollTrigger: {
             trigger: threeDLandingSectionRef.current,
-            start: 'top 60%',
+            start: 'top 90%',
             end: 'bottom bottom',
             scrub: 2,
           },
