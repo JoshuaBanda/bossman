@@ -269,7 +269,7 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp, f
               <motion.ul className={styles.list}
 
                 initial={{ rotate: 0 }}
-                animate={{ rotate: 360 }}
+                animate={{ x:40 }}
                 transition={{
                   duration: 1,
                   repeat: Infinity,
