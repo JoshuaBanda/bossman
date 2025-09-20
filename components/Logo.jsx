@@ -265,31 +265,25 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp, f
         </div>
 
         <div className={styles.loading}>
-          {finishLoadingProp ? <p>welcome</p> : <div style={{
-            display:'flex',
-          justifyContent:'center'
-          }}>
-          
-          <div>
-            Loading
-          </div>
-            <motion.div
-              initial={{ x: 0, y: 10 }}
-              animate={{ x: 10 }}
-              transition={{
-                duration: 0.5,     // how long one cycle takes
-                repeat: Infinity,  // loop forever
-                repeatType: "reverse" // this is the "yoyo" effect
-              }}
-              style={{
-                width: "5px",
-                height: "5px",
-                borderRadius: "50%",
-                background: "black"
-              }}
-            />
-
-          </div>}
+          {finishLoadingProp ? <p>welcome</p> : 
+          <motion.div
+>
+  <motion.ul className={styles.list}
+  
+  initial={{ rotate: 0 }}
+  animate={{ rotate: 360 }}
+  transition={{
+    duration: 2,         // full rotation time
+    repeat: Infinity,    // loop forever
+    ease: 'easeInOut',      // smooth spin
+  }}
+  >
+    <li></li>
+    <li></li>
+    <li></li>
+  </motion.ul>
+</motion.div>
+              }
         </div>
       </div>
     </div>
