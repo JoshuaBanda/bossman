@@ -158,8 +158,8 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp, f
           duration: 1,
           opacity: 1,
         }, '<')
-        .to(upperHandRef.current, { y: -150, x: 50, opacity: 0, rotate: '+=25', ease: 'power1.out',duration:1 }, '>')
-        .to(ridRef.current, { y: -100, x: 20, rotate: '+=45', ease: 'power1.out', opacity: 0 ,duration:1}, '<0.2')
+        .to(upperHandRef.current, { y: -150, x: 50, opacity: 0, rotate: '+=25', ease: 'power1.out', duration: 1 }, '>')
+        .to(ridRef.current, { y: -100, x: 20, rotate: '+=45', ease: 'power1.out', opacity: 0, duration: 1 }, '<0.2')
         .to(folkRef.current, { scale: 3, y: -30, ease: 'power1.out', duration: 1, x: -20 }, '<')
         .to(spoonRef.current, { scale: 2.5, y: -22, ease: 'power1.out', duration: 1, x: -2 }, '<0.5')
         .to(knifeRef.current, { scale: 2, y: -15, ease: 'power1.out', duration: 1 }, '<0.2')
@@ -265,25 +265,20 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp, f
         </div>
 
         <div className={styles.loading}>
-          {finishLoadingProp ? <p>welcome</p> : 
-          <motion.div
->
-  <motion.ul className={styles.list}
-  
-  initial={{ rotate: 0 }}
-  animate={{ rotate: 360 }}
-  transition={{
-    duration: 2,         // full rotation time
-    repeat: Infinity,    // loop forever
-    ease: 'easeInOut',      // smooth spin
-  }}
-  >
-    <li></li>
-    <li></li>
-    <li></li>
-  </motion.ul>
-</motion.div>
-              }
+          {finishLoadingProp ? <p>welcome</p> :
+              <motion.ul className={styles.list}
+
+                initial={{ rotate: 0 }}
+                animate={{ rotate: 360 }}
+                transition={{
+                  duration: 1,
+                  repeat: Infinity,
+                  ease: 'linear',
+                }}
+              >
+                <li></li>
+              </motion.ul>
+          }
         </div>
       </div>
     </div>
