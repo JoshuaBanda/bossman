@@ -158,8 +158,8 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp, f
           duration: 1,
           opacity: 1,
         }, '<')
-        .to(upperHandRef.current, { y: -90, x: 40, opacity: 0, rotate: '+=20', ease: 'power1.out' }, '>')
-        .to(ridRef.current, { y: -100, x: 20, rotate: '+=45', ease: 'power1.out', opacity: 0 }, '<')
+        .to(upperHandRef.current, { y: -150, x: 50, opacity: 0, rotate: '+=25', ease: 'power1.out',duration:1 }, '>')
+        .to(ridRef.current, { y: -100, x: 20, rotate: '+=45', ease: 'power1.out', opacity: 0 ,duration:1}, '<0.2')
         .to(folkRef.current, { scale: 3, y: -30, ease: 'power1.out', duration: 1, x: -20 }, '<')
         .to(spoonRef.current, { scale: 2.5, y: -22, ease: 'power1.out', duration: 1, x: -2 }, '<0.5')
         .to(knifeRef.current, { scale: 2, y: -15, ease: 'power1.out', duration: 1 }, '<0.2')

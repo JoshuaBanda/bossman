@@ -184,6 +184,11 @@ const SelectRelish = () => {
     }, [])
 
 
+    const handleCardClick = (index) => {
+        setSelectedRelish(index);
+    };
+
+
     return (
         <div className={styles.container}>
             <div className={styles.sideBar}>
@@ -244,6 +249,8 @@ const SelectRelish = () => {
                         mealQuantities={mealQuantities}
                         handleMealIncrement={handleMealIncrement}
                         handleMealDecrement={handleMealDecrement}
+                        onCardClick={handleCardClick}
+                        selectedRelish={selectedRelish}
                     />
 
                 </div>
@@ -270,7 +277,8 @@ export default SelectRelish;
 
 
 
-const SwiperDisplay = ({ relishList, meal, mealQuantities, handleMealIncrement, handleMealDecrement }) => {
+const SwiperDisplay = ({ relishList, meal, mealQuantities, handleMealIncrement, handleMealDecrement, onCardClick,
+    selectedRelish, }) => {
     const swiperRef = useRef(null);
 
     return (
@@ -298,6 +306,8 @@ const SwiperDisplay = ({ relishList, meal, mealQuantities, handleMealIncrement, 
                         quantity={mealQuantities[index]} // now defined
                         onIncrement={() => handleMealIncrement(index)}
                         onDecrement={() => handleMealDecrement(index)}
+                        onClick={() => onCardClick(index)}
+                        isSelected={selectedRelish === index}
                     />
                 </SwiperSlide>
             ))}
@@ -319,9 +329,11 @@ const SliderDisplayCard = ({
     mealName,
     relish,
     price = 4000,
-    quantity = 1,              // ✅ prop for current quantity
+    quantity = 1,
     onIncrement,
     onDecrement,
+    onClick,
+    isSelected
 }) => {
     const quantityReactionRef = useRef();
     const [plain, setPlain] = useState(false);
@@ -349,7 +361,11 @@ const SliderDisplayCard = ({
     }, [relish])
 
     return (
-        <div className={styles.sliderDisplayCardContainer}>
+
+        <div
+            className={`${styles.sliderDisplayCardContainer} ${isSelected ? styles.selectedCard : ''}`}
+            onClick={onClick}
+        >
             <div className={styles.likeContainer}>
 
             </div>

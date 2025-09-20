@@ -190,7 +190,7 @@ useFrame(() => {
       </group>
 
       {/*<ObjectLogger targetRef={saladRef} label="Salad" />*/}
-      <Environment preset="sunset" />
+      <Environment files="/venice_sunset_1k.hdr" />
     </>
   );
 };

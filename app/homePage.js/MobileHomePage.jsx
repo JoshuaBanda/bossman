@@ -106,9 +106,9 @@ const MobileHomePage = () => {
       gsap.to(contentRef.current, {
         scrollTrigger: {
           trigger: landingRef.current,
-          start: 'bottom bottom',
+          start: 'bottom 95%',
           end: 'bottom center',
-          scrub: true,
+          scrub: 2,
         },
         backgroundColor: 'white',
       });

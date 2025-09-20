@@ -17,18 +17,7 @@ const HandSection = () => {
   
 useEffect(()=>{
   const ctx=gsap.context(()=>{
-    gsap.to(textRef.current,{
-            scrollTrigger:{
-        trigger:handContainerRef.current,
-        start:'top 50%',
-        end:'bottom bottom',
-        toggleActions:'play none reverse none',
-      },
-      text:'No cooking required, just good food and good times.Get your meal delivered right to your doorstep',
-      duration:2.5,
-      delay:1.5,
-      ease:'power1'
-    });
+
     gsap.to(handRef.current,{
       scrollTrigger:{
         trigger:handContainerRef.current,
@@ -47,6 +36,7 @@ useEffect(()=>{
   return (
     <div className={styles.container} ref={handContainerRef}>
       <div className={styles.text} ref={textRef}>
+        No cooking required, just good food and good times.Get your meal delivered right to your doorstep
       </div>
         <div className={styles.handContainer} ref={handRef}>
         <Image
