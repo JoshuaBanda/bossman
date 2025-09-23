@@ -11,6 +11,7 @@ import CookerScene from "@/components/CookerScene";
 import Image from "next/image";
 import TextPlugin from "gsap/TextPlugin";
 import MobileHeroSection from "./mobile/MobileHeroSection";
+import MobileMenuList from "./MobileMenuList";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, Observer, TextPlugin);
 
@@ -211,20 +212,20 @@ export default function DesktopHomePage() {
             gsap.timeline({
                 scrollTrigger: {
                     trigger: section3Ref.current,
-                    start: 'top 80%',
-                    end: 'top top',
+                    start: 'top 50%',
+                    end: 'bottom bottom',
                     scrub: 1,
                     onUpdate: (self) => setMenuProgress(self.progress)
                 }
             }).to(cookerRef.current, {
-                yPercent: 100,
-                ease: 'power1.in'
+                yPercent: 80,
+                ease: 'power1'
             })
             gsap.to(menuRef.current, {
                 scrollTrigger: {
-                    trigger: section2Ref.current,
-                    start: 'top 80%',
-                    end: 'top top',
+                    trigger: section3Ref.current,
+                    start: 'top 20%',
+                    end: 'bottom bottom',
                     scrub: 1,
                 },
                 text: 'MENU'
@@ -274,13 +275,17 @@ export default function DesktopHomePage() {
                 <MobileHeroSection logoAnimationCompleteProp={logoAnimationComplete} />
             </section>
             <section ref={section2Ref} className={styles.section}>
-                <div className={`${styles.menu} styleFont`} ref={menuRef} />
+                <div className={`${styles.text}  styleFont`}>
+                    Get the best
+                </div>
             </section>
-            <section ref={section3Ref} className={styles.section}>
-                <h1>Section 3 (Pinned)</h1>
+            <section ref={section3Ref} className={`${styles.section}`}>
+                
+                <div className={`${styles.menu} styleFont`} ref={menuRef} />
+                
             </section>
             <section ref={section4Ref} className={styles.section}>
-                <h1>Section 4</h1>
+                <MobileMenuList/>
             </section>
             <section ref={section5Ref} className={styles.section}>
                 <h1>Section 5</h1>

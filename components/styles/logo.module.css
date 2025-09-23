@@ -201,8 +201,8 @@
 }
 
 .list li {
-  width: 2px;
-  height: 2px;
+  width: 4px;
+  height: 4px;
   position: absolute; /* place them freely */
   background-color: #222;
   border-radius: 50%;

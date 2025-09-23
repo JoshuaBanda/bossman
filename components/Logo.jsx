@@ -265,21 +265,7 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp, f
         </div>
 
         <div className={styles.loading}>
-          {finishLoadingProp ? <p>welcome</p> :
-              <motion.ul className={styles.list}
-
-                initial={{ opacity:0,scale:1 }}
-                animate={{ opacity:1,scale:1.5 }}
-                transition={{
-                  duration: 1,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
-              >
-                <li></li>
-                <li></li>
-                <li></li>
-              </motion.ul>
+          {finishLoadingProp ? <p>welcome</p> :<div> loading</div>
           }
         </div>
       </div>
