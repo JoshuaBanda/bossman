@@ -4,33 +4,40 @@ import styles from "./styles/procedueres.module.css";
 import Card from "./card/Card";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { TextPlugin } from "gsap/TextPlugin";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
 const Procedures = () => {
   const procedureContainerRef = useRef();
-  const itemsRef = useRef([]); // array of refs ordered by step
+  const itemsRef = useRef([]);
+  const headerRef = useRef();
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: procedureContainerRef.current,
-          start: "top 10%",
+          start: "top 20%",
           end: "bottom bottom",
           scrub: true,
         },
       });
 
-      // animate each item with a custom final rotation
-      itemsRef.current.forEach((el, i) => {
+      // Animate header text
+      tl.to(headerRef.current, {
+        text: "How to order",
+        duration: 1.2,
+        ease: "power1.inOut",
+      });
 
-
-        tl.to(
-          el,
-          { opacity: 1, y: 60, duration: 5, ease: "power1.out",delay:2 }, // end state
-          i * 0.3 // stagger-like timeline position
-        );
+      // Animate items with stagger
+      tl.to(itemsRef.current, {
+        opacity: 1,
+        y: 60,
+        duration: 1.5,
+        ease: "power1.out",
+        stagger: 0.3, // handles sequencing
       });
     }, procedureContainerRef);
 
@@ -38,12 +45,12 @@ const Procedures = () => {
   }, []);
 
   const procedureList = [
-    { step: 1, procedure: "select meal you want to order" },
-    { step: 2, procedure: "select meal you want to order" },
-    { step: 3, procedure: "select meal you want to order" },
-    { step: 4, procedure: "select meal you want to order" },
-    { step: 5, procedure: "select meal you want to order" },
-    { step: 6, procedure: "select meal you want to order" },
+    { step: 1, procedure: "select the meal you want to order" },
+    { step: 2, procedure: "confirm your meal choice" },
+    { step: 3, procedure: "add meal to cart" },
+    { step: 4, procedure: "enter delivery details" },
+    { step: 5, procedure: "make payment" },
+    { step: 6, procedure: "wait for delivery" },
   ];
 
   const leftSideCards = procedureList.filter((item) => item.step % 2 !== 0);
@@ -52,23 +59,26 @@ const Procedures = () => {
   return (
     <div className={styles.container} ref={procedureContainerRef}>
       <div className={styles.cardsContainer}>
+        <div className={`${styles.header} styleFont`} ref={headerRef}/>
+
         <ul className={styles.leftSideCardsDisplay}>
           {leftSideCards.map((item) => (
             <li
               key={item.step}
-              ref={(el) => (itemsRef.current[item.step - 1] = el)} // keep step order
-              className="procedureItem"
+              ref={(el) => (itemsRef.current[item.step - 1] = el)}
+              className={styles.procedureItem}
             >
               <Card step={item.step} procedure={item.procedure} />
             </li>
           ))}
         </ul>
+
         <ul className={styles.rightSideCardsDisplay}>
           {rightSideCards.map((item) => (
             <li
               key={item.step}
-              ref={(el) => (itemsRef.current[item.step - 1] = el)} // keep step order
-              className="procedureItem"
+              ref={(el) => (itemsRef.current[item.step - 1] = el)}
+              className={styles.procedureItem}
             >
               <Card step={item.step} procedure={item.procedure} />
             </li>

@@ -1,16 +1,16 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
-import styles from './styles/herosection.module.css';
+import styles from '../styles/mobileStyles/mobileHeroSection.module.css';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-import CallToAction from './CallToAction';
-import Procedures from './Procedures';
 import ProcedureScene from '@/components/ProcedureScene';
 import { Canvas } from '@react-three/fiber';
+import CallToAction from '../CallToAction';
+import Procedures from '../Procedures';
 
 gsap.registerPlugin(ScrollToPlugin);
-const HeroSection = ({ restaurantName = 'Restaurant', logoAnimationCompleteProp, }) => {
+const MobileHeroSection = ({ restaurantName = 'Restaurant', logoAnimationCompleteProp, }) => {
     const containerRef = useRef();
     const landingImageRef = useRef();
     const doorRef = useRef();
@@ -19,18 +19,31 @@ const HeroSection = ({ restaurantName = 'Restaurant', logoAnimationCompleteProp,
     const procedureRef = useRef();
     const sceneRef = useRef();
 
-    const [progress,setProgress]=useState(0);
+    const [progress, setProgress] = useState(0);
+
+
+
+    //dynamic height
+    useEffect(() => {
+  const setVh = () => {
+    document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+  };
+  setVh();
+  window.addEventListener('resize', setVh);
+  return () => window.removeEventListener('resize', setVh);
+}, []);
+
 
     /*opening animations */
     useEffect(() => {
-        
+
         if (!logoAnimationCompleteProp) return; // only run when prop is true
-        
+
 
         const ctx = gsap.context(() => {
             gsap.timeline({})
                 .to(landingImageRef.current, {
-                    y: -600,
+                    y: -400,
                     ease: 'power1',
                     duration: 2,
                     opacity: 1
@@ -45,7 +58,7 @@ const HeroSection = ({ restaurantName = 'Restaurant', logoAnimationCompleteProp,
             gsap.timeline({
                 scrollTrigger: {
                     trigger: containerRef.current,
-                    start: 'bottom 95%',
+                    start: 'bottom 90%',
                     end: 'bottom 50%',
                     scrub: 2,
                 }
@@ -53,12 +66,11 @@ const HeroSection = ({ restaurantName = 'Restaurant', logoAnimationCompleteProp,
                 .to(landingImageRef.current, {
                     rotate: '+=100',
                     ease: 'power1',
-                    x: 200,
-                    y: '-=100',
+                    x: 80,
                 })
                 .to(innerContainerRef.current, { y: -1000, ease: 'power1' }, '<')
                 .to(doorRef.current, {
-                    scale: 10,
+                    scale: 6,
                     ease: 'power1',
                     opacity: 1,
                 }, '<')
@@ -85,20 +97,19 @@ const HeroSection = ({ restaurantName = 'Restaurant', logoAnimationCompleteProp,
             });
 
             tl.to(landingImageRef.current, {
-                y: '-=700',
+                y: -700,
                 ease: 'power1',
-                opacity:0,
+                opacity: 0,
             })
                 .to(callToActionRef.current, {
                     opacity: 0,
                     yPercent: -100,
                     ease: 'power1.out',
-                    delay: 2
-                }, '<0.1')
+                }, '<')
                 .to(procedureRef.current, {
                     y: 0,
                     ease: 'power1'
-                }, '<0.1')
+                }, '<0.5')
         });
 
 
@@ -108,39 +119,41 @@ const HeroSection = ({ restaurantName = 'Restaurant', logoAnimationCompleteProp,
 
 
     /* scene animations */
-  useEffect(() => {
-  const ctx = gsap.context(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "bottom 15%",
-        end: "bottom -80%",
-        scrub: 1,
-      },
-    });
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "bottom 15%",
+                    end: "bottom -80%",
+                    scrub: 1,
+                },
+            });
 
-    tl.to(
-      sceneRef.current,
-      {
-        y: 0,
-        ease: "power1",
-      },
-      "<"
-    );
-    
-    gsap.timeline({scrollTrigger:{
-        trigger: containerRef.current,
-        start: "bottom 50%",
-        end: "bottom -50%",
-        scrub: 1,
-        onUpdate: (self) => {
-          setProgress(self.progress);
-        },
-    }})
-  });
+            tl.to(
+                sceneRef.current,
+                {
+                    y: -150,
+                    ease: "power1",
+                },
+                "<"
+            );
 
-  return () => ctx.revert();
-}, []);
+            gsap.timeline({
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "bottom 50%",
+                    end: "bottom -50%",
+                    scrub: 1,
+                    onUpdate: (self) => {
+                        setProgress(self.progress);
+                    },
+                }
+            })
+        });
+
+        return () => ctx.revert();
+    }, []);
 
     return (
         <div className={styles.container} ref={containerRef}>
@@ -160,8 +173,8 @@ const HeroSection = ({ restaurantName = 'Restaurant', logoAnimationCompleteProp,
                 <Image
                     src='/foodPlate.png'
                     alt='food'
-                    width={360}
-                    height={360}
+                    width={200}
+                    height={200}
                     priority
                 />
             </div>
@@ -175,11 +188,11 @@ const HeroSection = ({ restaurantName = 'Restaurant', logoAnimationCompleteProp,
 
             <div className={styles.sceneContainer} ref={sceneRef}>
                 <Canvas>
-                <ProcedureScene progress={progress}/>
+                    <ProcedureScene progress={progress} />
                 </Canvas>
             </div>
         </div>
     )
 }
 
-export default HeroSection
+export default MobileHeroSection

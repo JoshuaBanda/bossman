@@ -201,8 +201,8 @@
 }
 
 .list li {
-  width: 5px;
-  height: 5px;
+  width: 2px;
+  height: 2px;
   position: absolute; /* place them freely */
   background-color: #222;
   border-radius: 50%;
@@ -212,7 +212,7 @@
   transform: translateX(-10px);
 }
 .list li:nth-child(2) {
-  transform: translateY(15px);
+  transform: translateX(0px);
 }
 .list li:nth-child(3) {
   transform: translateX(10px);

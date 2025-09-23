@@ -1,14 +1,25 @@
 'use client';
 import SwiperComponent from '@/components/swiper/SwiperComponent'
-import React from 'react'
+import React, { useEffect, useRef } from 'react';
+import styles from './test.module.css';
+import Image from 'next/image';
+import gsap from 'gsap';
+import Procedures from '../homePage.js/Procedures';
 
-const page = () => {
+const page = ({}) => {
+  const containerRef=useRef();
+  const bigTextRef=useRef();
+  useEffect(()=>{
+    const ctx=gsap.context(()=>{
+      gsap.timeline({
+      })
+    });
+
+    return ()=> ctx.revert();
+  },[])
   return (
-    <div style={{
-        width:'100vw',
-        height:'100vh'
-    }}>
-        <SwiperComponent/>
+    <div className={styles.container} ref={containerRef}>
+      <Procedures/>
     </div>
   )
 }

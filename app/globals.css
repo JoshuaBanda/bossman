@@ -73,6 +73,30 @@ a {
   }
 }
 
+
+.styleFont{
+  font-family: mogra;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @font-face {
   font-family: 'SauceTomato';
   src: url('/fonts/sauce-tomato/SauceTomato.otf') format('truetype');
@@ -115,6 +139,13 @@ a {
 @font-face {
   font-family: 'poppins';
   src: url('/fonts/Poppins/Poppins-Light.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'mogra';
+  src: url('/fonts/Mogra/Mogra-Regular.ttf');
   font-weight: 400;
   font-style: normal;
 }

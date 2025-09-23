@@ -1,0 +1,203 @@
+.heroontainer{
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content:start;
+    overflow: hidden;
+    
+}
+.name{
+    position: relative;
+    width: auto;
+    min-width: 50%;
+    left: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 100px;
+    font-weight: bolder;
+    padding-left: 10px;
+    
+
+}   .nameFirstPortion{
+    width: 50%;
+    height: 20%;
+    z-index: 1;
+}   .nameLastPortion{
+    width: 50%;
+    height: 20%;
+    transform: translateY(-100%);
+    opacity: 0;
+}   .nameFirstPortion ul, .nameLastPortion ul{
+    color: white;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    align-items: center;
+}  .B, .O , .S1, .S2 {
+    margin:1px;
+    opacity: 0;
+    
+}
+    .B,.S1,.S2{
+        transform: translateY(50vh);
+    }
+    .O{
+        position: relative;
+        width: 80px;
+        min-height: 80%;
+        transform: rotate(0deg);
+        opacity: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }.bouncingBall{
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        opacity: 0;
+        transform: translateY(-50vh);
+    }
+    .M,.A,.N{
+        padding:0px  10px;
+        margin: 1px;
+        opacity: 0;
+    }
+    .M{
+        transform: translateX(-20vh) rotate((-45));
+    }
+    .A{
+        
+        transform: translateY(-20vh) rotate((50));
+    }
+    .N{
+        
+        transform: translateX(20vh) rotate((-45));
+    }
+
+
+
+
+    
+.pictures{
+    position: relative;
+    width: auto;
+    min-width: 50%;
+    height: 100vh;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding:50px 120px 0px 0px;
+
+
+}   .pictures ul{
+    position: absolute;
+    width: 50%;
+    height: 70%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0;
+}       
+.firstPic{
+    
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  border-top-left-radius: 50px;
+  overflow: hidden;
+}
+.secondPic{
+    grid-column: 2/2;
+    overflow: hidden;
+}
+.thirdPic{
+ grid-row: 2/4;   
+    overflow: hidden;
+}
+.fourthPic{
+    grid-row: 3/4;
+    overflow: hidden;
+}
+    .pictures ul li{
+    
+        position: relative;
+        opacity: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 2px;
+        border:5px solid rgba(245, 245, 245, 0.7);
+        
+}
+    .pictures ul li:hover{
+    
+        opacity: 1;
+        border:5px solid rgba(245, 245, 245, 0.918);
+        transform: translate3d(0,-2,0);
+        transition-property: border translate3d;
+        transition-timing-function: 0.4s;
+        
+}
+.firstPic  img,.secondPic  img,.thirdPic  img,.fourthPic img{
+    scale: 1.05;
+}
+
+.firstPic  img:hover,.secondPic  img:hover,.thirdPic  img:hover,.fourthPic img:hover{
+    scale: 1;
+    transition-property: scale;
+    transition-duration: 0.2s;
+}
+.gradientBox{
+    position: absolute;
+    width: 30vw;
+    height: 80vh;
+    transform: rotate(45deg);
+    background-image: conic-gradient(from 0deg, rgb(231, 231, 231),rgba(231, 0, 0, 0.7));
+    filter: blur(60);
+    opacity: 0.3;
+    right: 50;
+    top: 50;
+}
+.circle{
+    position: absolute;
+    width: 100vh;
+    height: 100vh;
+    top: -150px;left: -180px;
+    border-radius: 50%;
+    border: 10vh solid rgba(245, 245, 245, 0.137);
+    z-index: -1;
+
+}
+
+.zoomImage{
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.zoomImageInnerContainer{
+    position: relative;
+    height: 40%;
+    width: 50%;
+    border-radius: 60px;
+}
+.zoomImageInnerContainer Image{
+    border-radius: 20px;
+}
+.container{
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+}
+/*mix brend mode : screen*/

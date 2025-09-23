@@ -1,29 +1,31 @@
-.container{
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    position: relative;
-    
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  position: relative;
+
 }
 
 
-.cardsContainer{
+.cardsContainer {
   position: absolute;
 
- width: 50%;
- left: 10vw;
- height: 100%;
- display: flex;
- flex-direction: row;
- justify-content: space-between;
+  width: 50%;
+  left: 10vw;
+  height: 40vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  bottom: 60px;
 }
+
 .leftSideCardsDisplay {
   list-style: none;
   padding: 0;
 }
 
 .leftSideCardsDisplay li {
-margin-bottom: 7vh;
+  margin-bottom: 1px;
 }
 
 
@@ -33,55 +35,59 @@ margin-bottom: 7vh;
 }
 
 .rightSideCardsDisplay li {
-  margin-bottom: 5rem; /* adjust spacing */
+  margin-bottom: 1px;
+  /* adjust spacing */
 }
-.rightSideCardsDisplay li,.leftSideCardsDisplay li{
-    transform: translateY(100px);
-    opacity: 1;
+
+.rightSideCardsDisplay li,
+.leftSideCardsDisplay li {
+  transform: translateY(300px);
+  opacity: 0;
 }
+
+
+.header {
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  font-weight: 900;
+  font-size: 30px;
+}
+
+
 
 @media (max-width:700px) {
-  .container{
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    position: relative;
-    
-}
 
 
-.cardsContainer{
+.cardsContainer {
   position: absolute;
 
- width: 90%;
- left: 5vw;
- height: 100%;
- display: flex;
- flex-direction: row;
- justify-content: space-between;
-
-}
-.leftSideCardsDisplay {
-  list-style: none;
-  padding: 0;
+  width: 100%;
+  left: 2px;
+  height: 40vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  bottom: 30px;
 }
 
+
+.rightSideCardsDisplay li,
 .leftSideCardsDisplay li {
-margin-bottom: 7vh;
+  transform: translateY(0px);
+  opacity: 0;
+  margin: 2px;
+  width: 200px;
+}
+.rightSideCardsDisplay{
+  transform: translateX(-30px);
 }
 
 
-.rightSideCardsDisplay {
-  list-style: none;
-  padding: 0;
+
+
+.header {
+  font-size: 20px;
 }
 
-.rightSideCardsDisplay li {
-  margin-bottom: 8vh; /* adjust spacing */
-}
-.rightSideCardsDisplay li,.leftSideCardsDisplay li{
-    transform: translateY(100px);
-    opacity: 1;
-}
-  
 }

@@ -6,7 +6,6 @@ import React, { Suspense, useEffect, useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import FryingPan from './FryingPan';
 import Salad from './Salad';
-import ObjectLogger from './OnjectLogger';
 import { useFrame } from '@react-three/fiber';
 
 
@@ -25,9 +24,9 @@ const CookerScene = ({ progress, storyTellingProgress = 0, loadingProgress,onFal
   };
 
   const targetPositions = {
-    salad: [0.275, 1.5, -0.2],
-    pan: [0, 1, -0.3],
-    cooker: [0, -0.8, 0.],
+    salad: [-0.175, 1.5, -0.2],
+    pan: [-0.4, 1, -0.3],
+    cooker: [0, -0.9, 0],
   };
   useLayoutEffect(() => {
     if (typeof storyTellingProgress !== "number") return;
@@ -129,24 +128,34 @@ const fallbackLoggedRef = useRef(false);
 const [timeoutReached, setTimeoutReached] = React.useState(false);
 
 
-// run fallback timeout once
 useEffect(() => {
-  // only if loading is still active
   if (doneRef.current) return;
 
   const timeout = setTimeout(() => {
-    // mark fallback reached
-    setTimeoutReached(true);
-
-    // finish loading if not done
+    // only fire if still loading
     if (!doneRef.current) {
+      setTimeoutReached(true);
       loadingProgress(1);
       doneRef.current = true;
     }
   }, 10000);
 
   return () => clearTimeout(timeout);
-}, []); // <- only run once per mount
+}, []);
+
+useFrame(() => {
+  if (doneRef.current) return;
+
+  if (active) {
+    loadingProgress(loaderProgress / 100);
+  } else {
+    // ✅ cancel timeout when finished
+    doneRef.current = true;
+    loadingProgress(1);
+    setTimeoutReached(false); // prevent triggering fallback
+  }
+});
+
 
 // log fallback exactly once
   useEffect(() => {
@@ -174,8 +183,6 @@ useFrame(() => {
   return (
     <>
       <PerspectiveCamera ref={cameraRef} makeDefault position={[0.83, 3.96, 0.19]} />
-      <OrbitControls enableZoom={false} enableRotate={true} />
-      <ambientLight intensity={1.5} />
 
       <group ref={cookerRef}>
         <Suspense fallback={null}>

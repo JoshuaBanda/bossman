@@ -6,7 +6,7 @@ import React, { Suspense, useEffect, useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import FryingPan from './FryingPan';
 import Salad from './Salad';
-import ObjectLogger from './OnjectLogger';
+import ObjectLogger from './ObjectLogger';
 import { useFrame } from '@react-three/fiber';
 import MobileCooker from './MobileCooker';
 

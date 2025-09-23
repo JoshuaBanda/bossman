@@ -1,7 +1,7 @@
 /* container fills viewport and scrolls */
 .container {
   width: 100vw;
-  min-height: 100dvh;           /* ensure container = viewport */
+  min-height: 100vh;           /* ensure container = viewport */
 }
 
 .container::-webkit-scrollbar {
@@ -10,7 +10,7 @@
 
 /* each section fills the viewport and snaps */
 .section {
-  height: 100dvh;
+  height: 100vh;
   width: 100vw;
   display: flex;
   justify-content: center;
@@ -41,13 +41,13 @@ font-size: 40px;
 .cookerContainer{
     position: absolute;
     width: 100vw;
-    height: 100dvh;
-    top: 100dvh;
+    height: 100vh;
+    top: 100vh;
     transform: translateY(200vh);
     z-index: 10;
 }
 .logoSection{
-  height: 100dvh;
+  height: 100vh;
   width: 100vw;
   position: absolute;
   background-color: white;
@@ -56,7 +56,7 @@ font-size: 40px;
 
 .fallBackImage{
   width: 50vw;
-  height: 100dvh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;

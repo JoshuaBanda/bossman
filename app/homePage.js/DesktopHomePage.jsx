@@ -4,17 +4,17 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Observer } from "gsap/Observer";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import styles from './styles/mobileStyles/mobileHomePage.module.css';
+import styles from './styles/desktopHomePage.module.css';
+import HeroSection from "./HeroSection";
 import Logo from "@/components/Logo";
 import { Canvas } from "@react-three/fiber";
 import CookerScene from "@/components/CookerScene";
 import Image from "next/image";
 import TextPlugin from "gsap/TextPlugin";
-import MobileHeroSection from "./mobile/MobileHeroSection";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, Observer,TextPlugin);
 
-export default function MobileHomePage() {
+export default function DesktopHomePage() {
   const section1Ref = useRef(null);
   const section2Ref = useRef(null);
   const section3Ref = useRef(null);
@@ -46,7 +46,6 @@ export default function MobileHomePage() {
     setUseModel(false);
     // You can also update state, trigger animations, etc.
   };
-
 
 // helpers
 const disableScroll = () => {
@@ -115,7 +114,7 @@ useEffect(() => {
     let currentIndex = 0;
     let isAnimating = false;
     let cumulativeDelta = 0; // track scroll distance while pinned
-    const SCROLL_THRESHOLD = 350; // adjust this to make scroll harder/easier
+    const SCROLL_THRESHOLD = 100; // adjust this to make scroll harder/easier
 
     // --- Pin Section 1 ---
     const pin1 = ScrollTrigger.create({
@@ -161,10 +160,10 @@ useEffect(() => {
           cumulativeDelta -= self.deltaY;
           if (cumulativeDelta > SCROLL_THRESHOLD) {
             cumulativeDelta = 0;
-            snapToSection(currentIndex + 1);
+            snapToSection(currentIndex - 1);
           }
         } else {
-          snapToSection(currentIndex + 1);
+          snapToSection(currentIndex - 1);
         }
       },
       onDown: (self) => {
@@ -173,14 +172,24 @@ useEffect(() => {
           cumulativeDelta += self.deltaY;
           if (cumulativeDelta > SCROLL_THRESHOLD) {
             cumulativeDelta = 0;
-            snapToSection(currentIndex - 1);
+            snapToSection(currentIndex + 1);
           }
         } else {
-          snapToSection(currentIndex - 1);
+          snapToSection(currentIndex + 1);
         }
       }
     });
   }, []);
+
+  //refresh
+  useEffect(() => {
+  // Always reset scroll to top on mount
+  window.history.scrollRestoration = "manual"; // disable auto-restore
+  window.scrollTo(0, 0);
+
+  // reset GSAP/ScrollTrigger positions too
+  ScrollTrigger.refresh();
+}, []);
 useEffect(() => {
   window.scrollTo(0, 0);
 }, []);
@@ -201,7 +210,7 @@ useEffect(() => {
 
       gsap.timeline({
         scrollTrigger: {
-          trigger: section2Ref.current,
+          trigger: section3Ref.current,
           start: 'top 80%',
           end: 'top top',
           scrub: 1,
@@ -262,7 +271,7 @@ useEffect(() => {
       </div>
 
       <section ref={section1Ref} className={styles.section}>
-        <MobileHeroSection logoAnimationCompleteProp={logoAnimationComplete} />
+        <HeroSection logoAnimationCompleteProp={logoAnimationComplete} />
       </section>
       <section ref={section2Ref} className={styles.section}>
         <div className={`${styles.menu} styleFont`} ref={menuRef}/>

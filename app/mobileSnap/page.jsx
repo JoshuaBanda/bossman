@@ -4,17 +4,18 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Observer } from "gsap/Observer";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import styles from './styles/mobileStyles/mobileHomePage.module.css';
+import styles from './styles/mobileSnap.module.css';
+import HeroSection from "../homePage.js/HeroSection";
 import Logo from "@/components/Logo";
 import { Canvas } from "@react-three/fiber";
 import CookerScene from "@/components/CookerScene";
 import Image from "next/image";
 import TextPlugin from "gsap/TextPlugin";
-import MobileHeroSection from "./mobile/MobileHeroSection";
+import MobileHeroSection from "../homePage.js/mobile/MobileHeroSection";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, Observer,TextPlugin);
 
-export default function MobileHomePage() {
+export default function Page() {
   const section1Ref = useRef(null);
   const section2Ref = useRef(null);
   const section3Ref = useRef(null);
@@ -161,10 +162,10 @@ useEffect(() => {
           cumulativeDelta -= self.deltaY;
           if (cumulativeDelta > SCROLL_THRESHOLD) {
             cumulativeDelta = 0;
-            snapToSection(currentIndex + 1);
+            snapToSection(currentIndex - 1);
           }
         } else {
-          snapToSection(currentIndex + 1);
+          snapToSection(currentIndex - 1);
         }
       },
       onDown: (self) => {
@@ -173,10 +174,10 @@ useEffect(() => {
           cumulativeDelta += self.deltaY;
           if (cumulativeDelta > SCROLL_THRESHOLD) {
             cumulativeDelta = 0;
-            snapToSection(currentIndex - 1);
+            snapToSection(currentIndex + 1);
           }
         } else {
-          snapToSection(currentIndex - 1);
+          snapToSection(currentIndex + 1);
         }
       }
     });
@@ -201,7 +202,7 @@ useEffect(() => {
 
       gsap.timeline({
         scrollTrigger: {
-          trigger: section2Ref.current,
+          trigger: section3Ref.current,
           start: 'top 80%',
           end: 'top top',
           scrub: 1,

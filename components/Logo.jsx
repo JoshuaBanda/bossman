@@ -268,14 +268,16 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp, f
           {finishLoadingProp ? <p>welcome</p> :
               <motion.ul className={styles.list}
 
-                initial={{ rotate: 0 }}
-                animate={{ x:40 }}
+                initial={{ opacity:0,scale:1 }}
+                animate={{ opacity:1,scale:1.5 }}
                 transition={{
                   duration: 1,
                   repeat: Infinity,
                   ease: 'linear',
                 }}
               >
+                <li></li>
+                <li></li>
                 <li></li>
               </motion.ul>
           }

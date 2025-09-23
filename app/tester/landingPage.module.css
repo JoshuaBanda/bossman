@@ -1,0 +1,366 @@
+.container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 1000vhS;
+  overflow-y: scroll; /* Vertical scroll only */
+ /* scrollbar-width: none; /* Firefox */
+  overflow: hidden;
+}
+
+/* Hide scrollbar in WebKit browsers */
+/*.container::-webkit-scrollbar {
+  display: none;
+}
+*/
+
+.logoSection {
+  overflow: hidden;
+  transition: height 1s ease, opacity 1s ease;
+  z-index: 100;
+  height: 100vh;
+  width: 100vw;
+    position: relative;
+    z-index: 10000;
+    background-color: white;
+}
+/*section*/
+
+
+
+
+
+
+
+
+
+
+
+.heroSection{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.nameContainer{
+    position: relative;
+    height: 50vh;
+    width: 70vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 180px;
+    transform: translateY(-2vh) scale(0.9);
+    opacity: 0;
+    font-family: playfulDisplay;
+    font-weight: bold;
+}
+.threeDContainer{
+    position: absolute;
+    width: 50vw;
+    height: 100vh;
+    transform: translateY(100vh) rotate(-180deg);
+
+}
+
+.whyUsContainer,.ourServicesContainer{
+    height: 100vh;
+    width:30%;
+    position: absolute;
+}
+.whyUsContainer{
+    left: 0;
+    transform: translateX(-50vw);
+    border-right: 1px solid #222;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.whyUs{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    flex-direction: column;
+}
+.whyUs h4{
+    position: relative;
+}
+.whyUs ul{
+    position: relative;
+    padding-top: 20px;
+    list-style: none;
+
+}
+.whyUs ul li{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.whyUsImages{
+    position: relative;
+    width: 100%;
+    height: 30%;
+    background-color: red;
+    bottom: 0px;
+    margin-top: 50px;
+}
+.ourServicesContainer{
+    right: 0;
+    transform: translateX(50vw);
+    border-left: 1px solid #222;
+}
+@media (max-width:1080) {
+    .nameContainer{
+        font-size: 70px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.restaurantViewSection{
+    position: relative;
+    z-index: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+
+}
+
+
+.cookerSceneContainer{
+    width: 50vw;
+    height: 100vh;
+    position: absolute;
+    
+}
+.kitchen{
+    width: 300px;
+    height: 80vh;
+    position: absolute;
+    border-radius: 0px 0px 0px 0px;
+    overflow: hidden;
+    right: 25vw;
+    bottom: 50px;
+    z-index: -20;
+    opacity: 0;
+    display: none;
+}
+@media (max-width:1000) {
+    .kitchen{
+        right: 65px;
+    }
+}
+.getHotMeal{
+    position: absolute;
+    left: 4%;
+    top: 5vh;
+    width: 40vw;
+    height: 50vh;
+    font-size: 25px;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.in30Minutes{
+    
+    position: absolute;
+    right: 15%;
+    top: 20vh;
+    width: 40vw;
+    height: 50vh;
+    font-size: 25px;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    padding: 20px;
+    
+}
+
+@media (max-width:1080) {
+
+    .in30Minutes,.getHotMeal{
+        font-size: 20px;
+    }
+}
+
+
+
+
+
+.storyTelling {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+}
+
+.storyTrack {
+  display: flex;
+  height: 100%;
+  width: 400vw; /* or set dynamically */
+}
+
+.content {
+  flex: 0 0 100vw;
+  height: 100vh;
+  border: 1px solid #222;
+}
+
+.storyTrack .content:nth-child(1){
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.storyTrack .content:nth-child(2){
+    background-color: pink;
+}
+.storyTrack .content:nth-child(3){
+    background-color: #222;
+    color: aliceblue;
+}
+.storyTrack .content:nth-child(4){
+    background-color: yellow;
+}
+
+
+.behindTheSceneContainer{
+    background-color: pink;
+    width: 60%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+.behindTheSceneImage{
+    width: 70%;
+    height: 100%;
+    position: relative;
+}
+
+
+.menu{
+    position: relative;
+    width: 100vw;
+    height: 240vh;
+    display: none;
+}
+.menu .menuItem{
+    position: relative;
+    width: 100vw;
+    height: 60vh;
+    color: white;
+}
+.menu .menuItem:nth-child(1){
+}
+.menu .menuItem:nth-child(2){
+}
+.menu .menuItem:nth-child(3){
+}
+.menu .menuItem:nth-child(4){
+}
+.riceContainer{
+    height: 100%;
+    width: 50%;
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.riceTextContainer{
+    height: 100%;
+    width: 50%;
+    position: absolute;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    padding: 2%;
+    flex-direction: column;
+    justify-content: center;
+}
+.riceName{
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.description {
+    position: relative;
+    width: 60%;
+    height: 50%; /* Ensure parent has defined height */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centers content vertically */
+    padding: 1%;
+    border-radius: 8px; /* Optional: soft edges */
+    z-index: 1; /* Ensures blur effect layers properly */
+    align-self: center;
+}
+.orderRice {
+    position: absolute;
+    bottom: 1vh;
+    left: 50%; /* Centers horizontally (if parent is positioned relatively) */
+    transform: translateX(-50%); /* Fine-tunes centering */
+    display: flex;
+    justify-content: center; /* Ensures text is centered inside button */
+    align-items: center;
+    background-color: greenyellow;
+    padding: 10px 20px; /* More balanced padding */
+    border-radius: 5px; /* Smoother rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* More natural shadow */
+    transition: transform 0.3s ease; /* Faster, smoother hover effect */
+    cursor: pointer; /* Indicates clickability */
+    font-weight: bold; /* Makes text stand out */
+    border: none; /* Removes default button border (if applicable) */
+}
+
+.orderRice:hover {
+    transform: translate(-50%, -5px); /* Moves up slightly on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+    background-color: #a5e051; /* Slightly darker shade for feedback */
+}
