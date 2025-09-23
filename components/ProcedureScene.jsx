@@ -17,9 +17,7 @@ const ProcedureScene = ({ progress = 0 }) => {
   useLayoutEffect(() => {
     const updateScene = () => {
       const positions = [
-        [0.01, 5.07, 0.71],
         [-0.95, 2.05, 4.58],
-        [1.81, 4.45, 1.67],
         [-0.95, 2.05, 4.58]
       ];
 

@@ -97,7 +97,7 @@ const MobileHeroSection = ({ restaurantName = 'Restaurant', logoAnimationComplet
             });
 
             tl.to(landingImageRef.current, {
-                y: -700,
+                y: -1500,
                 ease: 'power1',
                 opacity: 0,
             })
@@ -157,7 +157,6 @@ const MobileHeroSection = ({ restaurantName = 'Restaurant', logoAnimationComplet
 
     return (
         <div className={styles.container} ref={containerRef}>
-
             <div className={styles.innerContainer} ref={innerContainerRef}>
                 <div className={`${styles.name} styleFont`}>
                     {restaurantName}

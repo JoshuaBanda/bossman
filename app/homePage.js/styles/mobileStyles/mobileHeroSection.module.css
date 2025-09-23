@@ -1,17 +1,20 @@
 .container {
   width: 100vw;
-  height: 100dvh;
+  height: 100vh;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 
+  
+    
   /* ✅ Background image setup */
   background-image: url('/restuarantint2.jpg');
-  background-size: cover;       /* make it cover the whole container */
-  background-position: center;  /* center the image */
-  background-repeat: no-repeat; /* prevent tiling */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
+
 
 
 .innerContainer{
@@ -32,7 +35,7 @@
     width: 200px;
     height: 250px;
     position: absolute;
-    bottom: 40px;
+    bottom: -60px;
     opacity: 0;
     z-index: 1;
 }
@@ -57,15 +60,15 @@
 
 .callToAction{
     width: 100vw;
-    height: 100dvh;
+    height: 100svh;
     position: absolute;
-    transform: translateY(100dvh);
+    transform: translateY(100svh);
     z-index: 2;
 }
 
 .procedures{
     position:absolute;
-    transform: translateY(100dvh);
+    transform: translateY(100svh);
     z-index: 4;
 
 }
@@ -73,10 +76,10 @@
 .sceneContainer{
     position: absolute;
     width: 100vw;
-    height: 100dvh;
+    height: 100svh;
     z-index: 5;
     right: 0px;
-    transform: translateY(100vh);
+    transform: translateY(100svh);
     display: flex;
     align-items: center;
     justify-content: center;

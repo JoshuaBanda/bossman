@@ -183,6 +183,8 @@ useFrame(() => {
   return (
     <>
       <PerspectiveCamera ref={cameraRef} makeDefault position={[0.83, 3.96, 0.19]} />
+      <OrbitControls enableZoom={false} enableRotate={false} />
+      <ambientLight intensity={1.5} />
 
       <group ref={cookerRef}>
         <Suspense fallback={null}>
