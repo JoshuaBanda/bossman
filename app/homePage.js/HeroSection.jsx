@@ -47,7 +47,7 @@ const HeroSection = ({ restaurantName = 'Restaurant', logoAnimationCompleteProp,
                     trigger: containerRef.current,
                     start: 'bottom 95%',
                     end: 'bottom 50%',
-                    scrub: 2,
+                    scrub: 1,
                 }
             })
                 .to(landingImageRef.current, {
@@ -80,7 +80,7 @@ const HeroSection = ({ restaurantName = 'Restaurant', logoAnimationCompleteProp,
                     trigger: containerRef.current,
                     start: 'bottom 15%',
                     end: 'bottom -50%',
-                    scrub: 2,
+                    scrub: 1,
                 }
             });
 

@@ -115,7 +115,7 @@ useEffect(() => {
     let currentIndex = 0;
     let isAnimating = false;
     let cumulativeDelta = 0; // track scroll distance while pinned
-    const SCROLL_THRESHOLD = 350; // adjust this to make scroll harder/easier
+    const SCROLL_THRESHOLD = 100; // adjust this to make scroll harder/easier
 
     // --- Pin Section 1 ---
     const pin1 = ScrollTrigger.create({
@@ -143,7 +143,7 @@ useEffect(() => {
 
       gsap.to(window, {
         scrollTo: { y: sections[index], autoKill: false },
-        duration: 1.2,
+        duration: 0.7,
         ease: "power2.inOut",
         onComplete: () => (isAnimating = false)
       });
