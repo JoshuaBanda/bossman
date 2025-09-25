@@ -47,39 +47,39 @@ const MobileMenuList = () => {
             })
                 .to(headerTextRef.current, {
                     text: 'Browse our menu, get new favorite dishes',
-                    ease: 'none',
+                    ease: 'power1',
                     duration: 2,
                 })
                 .to(firstMealRef.current, {
                     duration: 1,
                     y: 0,
                     opacity: 1,
-                    ease: 'none'
-                }, '<0.5')
+                    ease: 'power1'
+                }, '<0.1')
                 .to(secondMealRef.current, {
                     duration: 1,
                     y: 0,
                     opacity: 1,
-                    ease: 'none'
+                    ease: 'power1'
                 }, '<0.1')
                 .to(thirdMealRef.current, {
                     duration: 1,
                     y: 0,
                     opacity: 1,
-                    ease: 'none'
+                    ease: 'power1'
                 }, '<0.1')
                 .to(fourthMealRef.current, {
                     duration: 1,
                     y: 0,
                     opacity: 1,
-                    ease: 'none'
+                    ease: 'power1'
                 }, '<0.1')
                 .to(fifthMealRef.current, {
                     duration: 1,
                     y: 0,
                     opacity: 1,
                     ease: 'power2.inOut'
-                }, '<0.1')
+                }, '<')
         });
 
         return () => ctx.revert();

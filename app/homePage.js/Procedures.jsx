@@ -26,7 +26,7 @@ const Procedures = () => {
 
       // Animate header text
       tl.to(headerRef.current, {
-        text: "How to order",
+        text: "How to meal",
         duration: 1.2,
         ease: "power1.inOut",
       });

@@ -18,12 +18,15 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, Observer, TextPlugin, ScrollS
 
 export default function MobileHomePage() {
   const [canvasKey, setCanvasKey] = useState(0);
-
+const containerRef=useRef();
   const section1Ref = useRef(null);
   const section2Ref = useRef(null);
   const section3Ref = useRef(null);
   const section4Ref = useRef(null);
   const section5Ref = useRef(null);
+  const section6Ref = useRef(null);
+  const section7Ref = useRef(null);
+  const section8Ref = useRef(null);
 
   const menuRef = useRef();
   const cookerRef = useRef();
@@ -97,7 +100,7 @@ export default function MobileHomePage() {
     const smoother = ScrollSmoother.create({
       wrapper: "#smooth-wrapper",
       content: "#smooth-content",
-      smooth: 5,
+      smooth: 1,
       effects: true,
       normalizeScroll: true,
     });
@@ -121,7 +124,10 @@ export default function MobileHomePage() {
       section2Ref.current,
       section3Ref.current,
       section4Ref.current,
-      section5Ref.current
+      section5Ref.current,
+      section6Ref.current,
+      section7Ref.current,
+      section8Ref.current,
     ];
 
     let currentIndex = 0;
@@ -156,17 +162,17 @@ export default function MobileHomePage() {
       gsap.to(window, {
         scrollTo: { y: sections[index], autoKill: false },
         duration: 1.2,
-        ease: "power2.inOut",
+        ease: "power1",
         onComplete: () => (isAnimating = false)
       });
     };
 
     Observer.create({
       target: window,
-      type: "wheel,touch,pointer",
-      wheelSpeed: 2,
-      tolerance: 1,
-      preventDefault: false,
+      type: "touch,wheel,pointer",
+      wheelSpeed: 1.2,
+      tolerance: 2,
+      preventDefault: true,
       onUp: (self) => {
         const activePins = [pin1].filter(pin => pin.isActive);
         if (activePins.length > 0) {
@@ -233,6 +239,17 @@ useEffect(() => {
         duration: 0.5,
         text: "MENU",
       });
+
+      gsap.timeline({
+        scrollTrigger:{trigger:section5Ref.current,
+            start:'top 50%',
+            end:'top top',
+            scrub:true,
+        }
+      })
+      .to(containerRef.current,{backgroundColor:'#222',
+        color:'white',
+      })
     });
 
     return () => ctx.revert();
@@ -240,7 +257,7 @@ useEffect(() => {
 
   return (
     <div id="smooth-wrapper">
-      <div id="smooth-content" className={styles.container}>
+      <div id="smooth-content" className={styles.container} ref={containerRef}>
         <section className={styles.logoSection} ref={logoSectionRef}>
           <Logo loading={loading} finishLoadingProp={finishLoading} finishAnimationProp={finishAnimation} />
         </section>
@@ -281,7 +298,15 @@ useEffect(() => {
           <MobileMenuList />
         </section>
         <section ref={section5Ref} className={styles.section}>
-          <h1>Section 5</h1>
+            <span>
+                Delivering food anywhere, anytime!!!
+            </span>
+        </section>
+        <section ref={section6Ref} className={styles.section}>
+        </section>
+        <section ref={section7Ref} className={styles.section}>
+        </section>
+        <section ref={section8Ref} className={styles.section}>
         </section>
       </div>
     </div>

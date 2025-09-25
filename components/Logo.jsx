@@ -34,7 +34,7 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp, f
     if (loadingRef.current) {
       gsap.to(loadingRef.current, {
         width: `${loading * 100}%`,
-        duration: 0.5,
+        duration: 2,
         ease: 'power2.out',
       });
     }
@@ -111,12 +111,13 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp, f
         }, '<0.5')// independent, not on timeline
         .to(subContainerRef.current, {
           backgroundColor: 'transparent',
-          duration: 3,
+          duration: 2,
           ease: 'power1.out',
         }, '<2')
         .to(textEl, {
           stroke: 'black',
           duration: 1,
+          fill:'black',
           ease: 'power1.out',
         }, '<0.5')
         .to('#hand', {
