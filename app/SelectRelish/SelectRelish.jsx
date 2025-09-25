@@ -290,7 +290,7 @@ const SwiperDisplay = ({ relishList, meal, mealQuantities, handleMealIncrement, 
             loop={false}
             slidesPerView="auto"
             coverflowEffect={{
-                rotate: 15,
+                rotate: 5,
                 stretch: 0,
                 modifier: 2.5,
                 slideShadows: false,

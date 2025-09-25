@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react'
-import styles from './styles/mobileStyles/mobileMenuList.module.css';
+import styles from '../styles/mobileStyles/mobileMenuList.module.css';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -91,7 +91,7 @@ const MobileMenuList = () => {
             {isloading?(<Loading/>):
             (<>
                         <div className={styles.headerContainer} >
-                <div className={styles.header} ref={headerTextRef}>
+                <div className={`${styles.header} styleFont`} ref={headerTextRef}>
                 </div>
             </div>
             <div className={styles.mainContent}>
@@ -117,7 +117,7 @@ const MobileMenuList = () => {
                                         4.5
                                     </div>
                                 </div>
-                                <div className={styles.mealNameContainer}>
+                                <div className={`${styles.mealNameContainer} styleFont`}>
                                     Rice
                                 </div>
                             </div>
@@ -143,7 +143,7 @@ const MobileMenuList = () => {
                                         4.5
                                     </div>
                                 </div>
-                                <div className={styles.mealNameContainer}>
+                                <div className={`${styles.mealNameContainer} styleFont`}>
                                     Spaghetti
                                 </div>
                             </div>
@@ -169,7 +169,7 @@ const MobileMenuList = () => {
                                         4.5
                                     </div>
                                 </div>
-                                <div className={styles.mealNameContainer}>
+                                <div className={`${styles.mealNameContainer} styleFont`}>
                                     Nsima
                                 </div>
                             </div>
@@ -195,7 +195,7 @@ const MobileMenuList = () => {
                                         4.5
                                     </div>
                                 </div>
-                                <div className={styles.mealNameContainer}>
+                                <div className={`${styles.mealNameContainer} styleFont`}>
                                     Chips
                                 </div>
                             </div>
@@ -210,7 +210,7 @@ const MobileMenuList = () => {
                             </div>
                         </div>
                         <div className={styles.info}>
-                            <div className={styles.mealNameContainer}>
+                                <div className={`${styles.mealNameContainer} styleFont`}>
                                 Custome meal
                             </div>
 

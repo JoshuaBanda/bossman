@@ -49,7 +49,7 @@ font-size: 40px;
 .logoSection{
   height: 100vh;
   width: 100vw;
-  position: absolute;
+  position: fixed;
   background-color: white;
   z-index: 1000;
 }

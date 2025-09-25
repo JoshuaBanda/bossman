@@ -1,7 +1,6 @@
 'use client';
 import React, { useRef } from 'react';
-import DesktopHomePage from './DesktopHomePage';
-import MobileHomePage from './MobileHomePage';
+import MobileHomePage from './mobile/MobileHomePage';
 
 
 const HomePage = () => {

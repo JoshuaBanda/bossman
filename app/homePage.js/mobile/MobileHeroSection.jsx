@@ -23,15 +23,6 @@ const MobileHeroSection = ({ restaurantName = 'Restaurant', logoAnimationComplet
 
 
 
-    //dynamic height
-    useEffect(() => {
-  const setVh = () => {
-    document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
-  };
-  setVh();
-  window.addEventListener('resize', setVh);
-  return () => window.removeEventListener('resize', setVh);
-}, []);
 
 
     /*opening animations */
@@ -41,13 +32,15 @@ const MobileHeroSection = ({ restaurantName = 'Restaurant', logoAnimationComplet
 
 
         const ctx = gsap.context(() => {
-            gsap.timeline({})
+            gsap.timeline({
+            })
+            .set(landingImageRef.current,{opacity:0,y:400})
                 .to(landingImageRef.current, {
-                    y: -400,
                     ease: 'power1',
-                    duration: 2,
-                    opacity: 1
-                }, '<0.5')
+                    duration: 1,
+                    opacity: 1,
+                    y:0
+                })
         });
 
         return () => ctx.revert();
@@ -60,7 +53,7 @@ const MobileHeroSection = ({ restaurantName = 'Restaurant', logoAnimationComplet
                     trigger: containerRef.current,
                     start: 'bottom 90%',
                     end: 'bottom 50%',
-                    scrub: 2,
+                    scrub: 1,
                 }
             })
                 .to(landingImageRef.current, {
@@ -77,29 +70,25 @@ const MobileHeroSection = ({ restaurantName = 'Restaurant', logoAnimationComplet
                 .to(callToActionRef.current, {
                     y: 0, ease: 'power1',
                     width: '100vw'
-                }, '<')
-        });
-
-        return () => ctx.revert();
-    }, []);
+                }, '<');
 
 
-    /*second scroll animations */
-    useEffect(() => {
-        const ctx = gsap.context(() => {
-            const tl = gsap.timeline({
+
+
+
+            /*second scroll animations */
+            const t2 = gsap.timeline({
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: 'bottom 15%',
                     end: 'bottom -50%',
-                    scrub: 2,
+                    scrub: 1,
                 }
             });
 
-            tl.to(landingImageRef.current, {
-                y: -1500,
-                ease: 'power1',
-                opacity: 0,
+            t2.to(landingImageRef.current, {
+                y: -800,
+
             })
                 .to(callToActionRef.current, {
                     opacity: 0,
@@ -112,9 +101,12 @@ const MobileHeroSection = ({ restaurantName = 'Restaurant', logoAnimationComplet
                 }, '<0.5')
         });
 
-
         return () => ctx.revert();
     }, []);
+
+
+
+
 
 
 

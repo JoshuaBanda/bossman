@@ -61,8 +61,13 @@ const enableScroll = () => {
 };
 
 useEffect(() => {
-  // Disable scroll on mount (before logo finishes)
-  disableScroll();
+  if (!logoAnimationComplete) {
+    disableScroll();
+
+    if (window.ScrollSmootherInstance) {
+      window.ScrollSmootherInstance.paused(true);
+    }
+  }
 
   if (finishLoading && logoAnimationComplete && !hasLoggedRef.current) {
     hasLoggedRef.current = true;
@@ -76,7 +81,12 @@ useEffect(() => {
             if (logoSectionRef.current) {
               logoSectionRef.current.style.display = 'none';
               ScrollTrigger.refresh();
+
               enableScroll(); // ✅ Re-enable scroll AFTER logo animation finishes
+
+              if (window.ScrollSmootherInstance) {
+                window.ScrollSmootherInstance.paused(false);
+              }
             }
           }
         });
@@ -85,6 +95,7 @@ useEffect(() => {
     return () => ctx.revert();
   }
 }, [finishLoading, logoAnimationComplete]);
+
 
 
   const finishAnimation = async () => {

@@ -20,7 +20,7 @@
 .innerContainer{
     border: 1px solid rgba(255, 255, 255, 0.4);
     width: 95vw;
-    height: 90vh;
+    height: 85vh;
     border-radius: 20px;
     background-color: rgba(0,0,0,0);
     z-index: 1;
@@ -28,6 +28,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    transform: translateY(-25px);
 
 }
 
@@ -39,17 +40,14 @@
     opacity: 0;
     z-index: 1;
 }
-.landingImageContainer{
-    width: 200px;
-    height: 200px;
-    position: absolute;
-    bottom: -350px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    z-index: 3;
+.landingImageContainer {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  bottom: 50px;  /* visible near bottom */
+  z-index: 3;
 }
+
 .name{
     position: absolute;
     bottom: 10px;
@@ -60,15 +58,15 @@
 
 .callToAction{
     width: 100vw;
-    height: 100svh;
+    height: 100vh;
     position: absolute;
-    transform: translateY(100svh);
+    transform: translateY(100vh);
     z-index: 2;
 }
 
 .procedures{
     position:absolute;
-    transform: translateY(100svh);
+    transform: translateY(100vh);
     z-index: 4;
 
 }
@@ -76,10 +74,10 @@
 .sceneContainer{
     position: absolute;
     width: 100vw;
-    height: 100svh;
+    height: 100vh;
     z-index: 5;
     right: 0px;
-    transform: translateY(100svh);
+    transform: translateY(100vh);
     display: flex;
     align-items: center;
     justify-content: center;

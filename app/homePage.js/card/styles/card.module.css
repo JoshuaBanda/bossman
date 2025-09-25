@@ -61,11 +61,19 @@
 
 }
  .step {
-  padding: 0px 10px;
   position: absolute;
   left: 0px;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 900;
+  background-color: orangered;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: white;
+  transform: translateY(-5px);
 }
 
 .procedure {
@@ -74,8 +82,9 @@
   padding: 0px 8px;
   margin: 0 auto 10px auto;
   transition: transform 0.4s ease-in-out;
+  font-weight: 900;
   font-size: 14px;
-  transform: translateX(-70px);
+  transform: translateX(-80px);
 
 }
 

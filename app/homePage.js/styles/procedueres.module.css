@@ -63,12 +63,12 @@
   position: absolute;
 
   width: 100%;
-  left: 2px;
+  left: 10px;
   height: 40vh;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  bottom: 30px;
+  bottom: 20px;
 }
 
 

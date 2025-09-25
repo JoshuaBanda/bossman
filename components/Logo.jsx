@@ -265,7 +265,7 @@ const Logo = ({ restaurantName = 'Restaurant', loading = 0, finishLoadingProp, f
         </div>
 
         <div className={styles.loading}>
-          {finishLoadingProp ? <p>welcome</p> :<div> loading</div>
+          {finishLoadingProp ? <p>welcome</p> :<div> Loading</div>
           }
         </div>
       </div>

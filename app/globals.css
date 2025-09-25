@@ -54,6 +54,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family: 'poppins';
   color: #222;
+  overflow-x: hidden;
+  overscroll-behavior: none;
+}
+#sooth-content{
+  overflow: visible;
+  width: 100%;
 }
 
 * {

@@ -1,5 +1,5 @@
 "use client";
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 import styles from "./styles/procedueres.module.css";
 import Card from "./card/Card";
 import gsap from "gsap";
@@ -13,14 +13,14 @@ const Procedures = () => {
   const itemsRef = useRef([]);
   const headerRef = useRef();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: procedureContainerRef.current,
-          start: "top 20%",
+          start: "top -50%",
           end: "bottom bottom",
-          scrub: true,
+          toggleActions:'play none none reverse',
         },
       });
 
