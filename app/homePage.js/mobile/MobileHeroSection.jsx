@@ -19,9 +19,6 @@ const MobileHeroSection = ({ restaurantName = 'Restaurant', logoAnimationComplet
     const procedureRef = useRef();
     const sceneRef = useRef();
 
-    const firstLeafRef = useRef();
-    const secondLeafRef = useRef();
-
     const [progress, setProgress] = useState(0);
 
 
@@ -37,27 +34,13 @@ const MobileHeroSection = ({ restaurantName = 'Restaurant', logoAnimationComplet
         const ctx = gsap.context(() => {
             gsap.timeline({
             })
-                .set(landingImageRef.current, { opacity: 0, y: 400 })
+            .set(landingImageRef.current,{opacity:0,y:400})
                 .to(landingImageRef.current, {
                     ease: 'power1.out',
                     duration: 2,
                     opacity: 1,
-                    y: 0
+                    y:0
                 })
-                .to(firstLeafRef.current, {
-                    y: 0,
-                    opacity: 1,
-                    rotation: 0,
-                    duration: 2,
-                    x: 10
-                }, '<1')
-                .to(secondLeafRef.current, {
-                    y: 0,
-                    opacity: 1,
-                    rotation: 0,
-                    duration: 2,
-                    x: -10
-                }, '<')
         });
 
         return () => ctx.revert();
@@ -65,7 +48,6 @@ const MobileHeroSection = ({ restaurantName = 'Restaurant', logoAnimationComplet
     /*first scroll animations*/
     useEffect(() => {
         const ctx = gsap.context(() => {
-            gsap.timeline({}).set(firstLeafRef.current, { opacity: 0, rotation: '-=60',y:50 }).set(secondLeafRef.current, { opacity: 0, rotation: '+=60', y: 50 })
             gsap.timeline({
                 scrollTrigger: {
                     trigger: containerRef.current,
@@ -75,7 +57,7 @@ const MobileHeroSection = ({ restaurantName = 'Restaurant', logoAnimationComplet
                 }
             })
                 .to(landingImageRef.current, {
-                    rotation: '+=100',
+                    rotate: '+=100',
                     ease: 'power1',
                     x: 80,
                 })
@@ -84,7 +66,6 @@ const MobileHeroSection = ({ restaurantName = 'Restaurant', logoAnimationComplet
                     scale: 6,
                     ease: 'power1',
                     opacity: 1,
-                    delay: 0.5,
                 }, '<')
                 .to(callToActionRef.current, {
                     y: 0, ease: 'power1',
@@ -92,26 +73,9 @@ const MobileHeroSection = ({ restaurantName = 'Restaurant', logoAnimationComplet
                 }, '<');
 
 
-//leaves animation
-const leavesAnimtion=gsap.timeline({
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: 'bottom 95%',
-                    end: 'bottom 50%',
-                }
-            })
-            .to(firstLeafRef.current, {
-                opacity: 0,
-                ease: 'power1.out',
-                rotation: '-=30',
-                y:50
-            }).to(secondLeafRef.current, {
-                opacity: 0,
-                ease: 'power1.out',
-                rotation: '+=30',
-                y:50,
-            }, '<')
-    
+
+
+
             /*second scroll animations */
             const t2 = gsap.timeline({
                 scrollTrigger: {
@@ -203,26 +167,6 @@ const leavesAnimtion=gsap.timeline({
                     height={200}
                     priority
                 />
-            </div>
-            <div className={styles.leavesContainer}>
-                <div className={styles.firstLeaf} ref={firstLeafRef}>
-                    <Image
-                        src='/chineseLeaf.png'
-                        alt='l1'
-                        width={250}
-                        height={250}
-                        priority
-                    />
-                </div>
-                <div className={styles.secondLeaf} ref={secondLeafRef}>
-                    <Image
-                        src='/chineseLeaf.png'
-                        alt='l2'
-                        width={250}
-                        height={250}
-                        priority
-                    />
-                </div>
             </div>
 
             <div className={styles.callToAction} ref={callToActionRef} style={{ width: '20vw', overflow: 'hidden' }}>
