@@ -44,7 +44,7 @@
   width: 200px;
   height: 200px;
   position: absolute;
-  bottom: 50px;  /* visible near bottom */
+  bottom: 100px;  /* visible near bottom */
   z-index: 3;
 }
 

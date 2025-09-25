@@ -266,15 +266,15 @@ useEffect(() => {
           </div>
         </div>
 
-        <section ref={section1Ref} className={styles.section} style={{ backgroundColor: "pink" }}>
+        <section ref={section1Ref} className={styles.section} >
           <MobileHeroSection logoAnimationCompleteProp={logoAnimationComplete} />
         </section>
-        <section ref={section2Ref} className={styles.section} style={{ backgroundColor: "green" }}>
+        <section ref={section2Ref} className={styles.section} >
           <div className={`${styles.text} styleFont`} id="primaryColorTwo">
             Get the best
           </div>
         </section>
-        <section ref={section3Ref} className={`${styles.section}`} style={{ backgroundColor: "yellow" }}>
+        <section ref={section3Ref} className={`${styles.section}`} >
           <div className={`${styles.menu} styleFont`} ref={menuRef} id="primaryColorTwo" />
         </section>
         <section ref={section4Ref} className={styles.section}>
