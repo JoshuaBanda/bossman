@@ -247,7 +247,7 @@ useEffect(() => {
             scrub:true,
         }
       })
-      .to(containerRef.current,{backgroundColor:'#222',
+      .to(containerRef.current,{backgroundColor:'#111111ff',
         color:'white',
       })
     });
